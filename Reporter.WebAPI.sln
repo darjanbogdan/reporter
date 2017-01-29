@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reporter.DAL", "src\Reporte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reporter.Repository", "src\Reporter.Repository\Reporter.Repository.csproj", "{59486697-3B56-4729-8566-0FBF3BAD03FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reporter.Model", "src\Repository.Model\Reporter.Model.csproj", "{44ED9F10-2017-47BD-9AEB-99A34871FD3D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reporter.Model", "src\Reporter.Model\Reporter.Model.csproj", "{44ED9F10-2017-47BD-9AEB-99A34871FD3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reporter.Service", "src\Reporter.Service\Reporter.Service.csproj", "{0E9BB257-923E-4BE7-92C6-AE22352650E3}"
 EndProject

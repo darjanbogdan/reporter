@@ -69,10 +69,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Identity\AccountRepository.cs" />
-    <Compile Include="Identity\Contracts\IAccountRepository.cs" />
-    <Compile Include="Identity\Contracts\IUserRepository.cs" />
-    <Compile Include="Identity\UserRepository.cs" />
+    <Compile Include="Membership\AccountRepository.cs" />
+    <Compile Include="Membership\Contracts\IAccountRepository.cs" />
+    <Compile Include="Membership\Contracts\IUserRepository.cs" />
+    <Compile Include="Membership\UserRepository.cs" />
     <Compile Include="Infrastructure\Mapper\RepositoryProfile.cs" />
     <Compile Include="PackageRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,7 +86,7 @@
       <Project>{CA9F28E8-E2AA-45FA-9423-C61E17437F4E}</Project>
       <Name>Reporter.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repository.Model\Reporter.Model.csproj">
+    <ProjectReference Include="..\Reporter.Model\Reporter.Model.csproj">
       <Project>{44ED9F10-2017-47BD-9AEB-99A34871FD3D}</Project>
       <Name>Reporter.Model</Name>
     </ProjectReference>

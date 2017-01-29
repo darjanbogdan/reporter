@@ -167,6 +167,7 @@
     <Compile Include="Infrastructure\Owin\Providers\CallContextOwinContextProvider.cs" />
     <Compile Include="Infrastructure\Owin\Providers\IOwinContextProvider.cs" />
     <Compile Include="Infrastructure\Security\OAuth\ReporterOAuthProvider.cs" />
+    <Compile Include="PackageRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -189,7 +190,11 @@
       <Project>{59486697-3B56-4729-8566-0FBF3BAD03FE}</Project>
       <Name>Reporter.Repository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repository.Model\Reporter.Model.csproj">
+    <ProjectReference Include="..\Reporter.Service\Reporter.Service.csproj">
+      <Project>{0E9BB257-923E-4BE7-92C6-AE22352650E3}</Project>
+      <Name>Reporter.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reporter.Model\Reporter.Model.csproj">
       <Project>{44ed9f10-2017-47bd-9aeb-99a34871fd3d}</Project>
       <Name>Reporter.Model</Name>
     </ProjectReference>

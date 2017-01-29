@@ -7,14 +7,14 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Repository.Identity.Contracts
+namespace Reporter.Repository.Membership.Contracts
 {
     public interface IAccountRepository
     {
         Task RegisterAsync(User user);
 
-        Task<ApplicationUser> FindAsync(string userName, string password);
+        Task<ApplicationUser> GetAsync(string userName, string password);
 
-        Task<ClaimsIdentity> GenerateUserIdentityAsync(ApplicationUser user, string authenticationType);
+        Task<ClaimsIdentity> CreateIdentityAsync(ApplicationUser user, string authenticationType);
     }
 }

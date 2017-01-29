@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
+using Reporter.Service.Membership.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,41 +12,45 @@ namespace Reporter.WebAPI.Infrastructure.Security.OAuth
 {
     public class ReporterOAuthProvider : OAuthAuthorizationServerProvider
     {
-        public ReporterOAuthProvider()
-        {
+        private readonly Func<IAccountService> accountServiceFactory;
 
+        public ReporterOAuthProvider(Func<IAccountService> accountServiceFactory)
+        {
+            this.accountServiceFactory = accountServiceFactory;
         }
 
-        public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+        public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            //var allowedOrigin = "*";
+            var allowedOrigin = "*";
 
-            //context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-            //var userManager = context.OwinContext.GetUserManager<UserManager<ApplicationUser, Guid>>();
+            var accountService = this.accountServiceFactory.Invoke();
 
-            //ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            var user = await accountService.GetAccountAsync(context.UserName, context.Password);
 
-            //if (user == null)
-            //{
-            //    context.SetError("invalid_grant", "The user name or password is incorrect.");
-            //    return;
-            //}
+            if (user == null)
+            {
+                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                return;
+            }
 
-            //if (!user.EmailConfirmed)
-            //{
-            //    context.SetError("invalid_grant", "User did not confirm email.");
-            //    return;
-            //}
+            if (!user.EmailConfirmed)
+            {
+                context.SetError("invalid_grant", "User did not confirm email.");
+                return;
+            }
 
-            //ClaimsIdentity oAuthIdentity = await userManager.CreateIdentityAsync(user, "JWT");
-            //oAuthIdentity.AddClaims(new[] { new Claim(ClaimTypes.Role, "User") });
+            ClaimsIdentity oAuthIdentity = await accountService.CreateIdentityAsync(user);
 
-            //var ticket = new AuthenticationTicket(oAuthIdentity, null);
+            foreach (var role in user.User.Roles)
+            {
+                oAuthIdentity.AddClaims(new[] { new Claim(ClaimTypes.Role, role.RoleId.ToString()) });
+            }
 
-            //context.Validated(ticket);
+            var ticket = new AuthenticationTicket(oAuthIdentity, null);
 
-            return Task.FromResult(true);
+            context.Validated(ticket);
         }
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)

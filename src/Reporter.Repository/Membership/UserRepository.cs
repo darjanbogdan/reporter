@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Reporter.DAL.Models.Identity;
 using Reporter.Model.Identity;
-using Reporter.Repository.Identity.Contracts;
+using Reporter.Repository.Membership.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Repository.Identity
+namespace Reporter.Repository.Membership
 {
     public class UserRepository : IUserRepository
     {

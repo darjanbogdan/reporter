@@ -30,6 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=3.3.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.3.3.2\lib\net45\SimpleInjector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector.Packaging, Version=3.3.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.Packaging.3.3.2\lib\net40-client\SimpleInjector.Packaging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,7 +52,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Membership\AccountService.cs" />
+    <Compile Include="Membership\Contracts\IAccountService.cs" />
+    <Compile Include="Membership\Contracts\IUserService.cs" />
+    <Compile Include="Membership\UserService.cs" />
+    <Compile Include="PackageRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Reporter.DAL\Reporter.DAL.csproj">
+      <Project>{CA9F28E8-E2AA-45FA-9423-C61E17437F4E}</Project>
+      <Name>Reporter.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reporter.Repository\Reporter.Repository.csproj">
+      <Project>{59486697-3B56-4729-8566-0FBF3BAD03FE}</Project>
+      <Name>Reporter.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reporter.Model\Reporter.Model.csproj">
+      <Project>{44ED9F10-2017-47BD-9AEB-99A34871FD3D}</Project>
+      <Name>Reporter.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

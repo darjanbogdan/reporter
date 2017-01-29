@@ -1,5 +1,5 @@
-﻿using Reporter.Repository.Identity;
-using Reporter.Repository.Identity.Contracts;
+﻿using Reporter.Repository.Membership;
+using Reporter.Repository.Membership.Contracts;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 using System;

@@ -85,7 +85,7 @@ namespace Reporter.WebAPI
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/oauth/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = new ReporterOAuthProvider(),
+                Provider = container.GetInstance<ReporterOAuthProvider>(),
                 AccessTokenFormat = new ReporterJwtFormat("http://reporter.local", null)
             };
 

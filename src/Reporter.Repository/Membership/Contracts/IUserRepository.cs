@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Repository.Identity.Contracts
+namespace Reporter.Repository.Membership.Contracts
 {
     public interface IUserRepository
     {

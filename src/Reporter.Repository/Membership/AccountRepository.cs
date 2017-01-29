@@ -2,7 +2,7 @@
 using Microsoft.AspNet.Identity;
 using Reporter.DAL.Models.Identity;
 using Reporter.Model.Identity;
-using Reporter.Repository.Identity.Contracts;
+using Reporter.Repository.Membership.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Repository.Identity
+namespace Reporter.Repository.Membership
 {
     public class AccountRepository : IAccountRepository
     {
@@ -31,12 +31,12 @@ namespace Reporter.Repository.Identity
             var result = await this.userManager.CreateAsync(appUser, "123456");
         }
 
-        public Task<ApplicationUser> FindAsync(string userName, string password)
+        public Task<ApplicationUser> GetAsync(string userName, string password)
         {
             return this.userManager.FindAsync(userName, password);
         }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(ApplicationUser user, string authenticationType)
+        public async Task<ClaimsIdentity> CreateIdentityAsync(ApplicationUser user, string authenticationType)
         {
             var userIdentity = await this.userManager.CreateIdentityAsync(user, authenticationType);
             // Add custom user claims here
