@@ -18,9 +18,5 @@ namespace Reporter.Service.Membership
             this.userRepository = userRepository;
         }
 
-        public Task<IEnumerable<User>> FindAsync(string searchTerm, int page, int rpp)
-        {
-            return this.userRepository.FindAsync(searchTerm, page, rpp);
-        }
     }
 }

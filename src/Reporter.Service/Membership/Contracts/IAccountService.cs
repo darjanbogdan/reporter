@@ -13,5 +13,7 @@ namespace Reporter.Service.Membership.Contracts
         Task<Account> GetAccountAsync(string userName, string password);
 
         Task<ClaimsIdentity> CreateIdentityAsync(Account account);
+
+        Task RegisterAccountAsync(AccountRegistration accountRegistration);
     }
 }

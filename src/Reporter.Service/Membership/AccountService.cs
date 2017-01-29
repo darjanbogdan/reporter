@@ -37,5 +37,13 @@ namespace Reporter.Service.Membership
 
             return this.mapper.Map<Account>(applicationUser);
         }
+
+        public Task RegisterAccountAsync(AccountRegistration accountRegistration)
+        {
+            var user = this.mapper.Map<User>(accountRegistration);
+            user.Id = Guid.NewGuid();
+
+            return this.accountRepository.RegisterAsync(user, accountRegistration.Password);
+        }
     }
 }

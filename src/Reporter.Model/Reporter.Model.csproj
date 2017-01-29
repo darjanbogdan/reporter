@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Identity\Account.cs" />
+    <Compile Include="Identity\AccountRegistration.cs" />
     <Compile Include="Identity\Role.cs" />
     <Compile Include="Identity\User.cs" />
     <Compile Include="Identity\UserRole.cs" />

@@ -24,11 +24,11 @@ namespace Reporter.Repository.Membership
             this.mapper = mapper;
         }
 
-        public async Task RegisterAsync(User user)
+        public async Task RegisterAsync(User user, string password)
         {
             var appUser = this.mapper.Map<ApplicationUser>(user);
 
-            var result = await this.userManager.CreateAsync(appUser, "123456");
+            var result = await this.userManager.CreateAsync(appUser, password);
         }
 
         public Task<ApplicationUser> GetAsync(string userName, string password)
