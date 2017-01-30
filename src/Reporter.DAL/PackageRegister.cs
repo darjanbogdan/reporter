@@ -20,13 +20,13 @@ namespace Reporter.DAL
     {
         public void RegisterServices(Container container)
         {
-            container.Register<DbContext>(() => new ApplicationDbContext(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString), new ExecutionContextScopeLifestyle());
+            container.Register<DbContext>(() => new ApplicationDbContext(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString), Lifestyle.Scoped);
 
-            container.Register<IUserStore<ApplicationUser, Guid>, ApplicationUserStore>(new ExecutionContextScopeLifestyle());
+            container.Register<IUserStore<ApplicationUser, Guid>, ApplicationUserStore>(Lifestyle.Scoped);
 
-            container.Register<IRoleStore<ApplicationRole, Guid>, ApplicationRoleStore>(new ExecutionContextScopeLifestyle());
+            container.Register<IRoleStore<ApplicationRole, Guid>, ApplicationRoleStore>(Lifestyle.Scoped);
 
-            container.Register<UserManager<ApplicationUser, Guid>, ApplicationUserManager>(new ExecutionContextScopeLifestyle());
+            container.Register<UserManager<ApplicationUser, Guid>, ApplicationUserManager>(Lifestyle.Scoped);
         }
     }
 }

@@ -9,6 +9,5 @@ namespace Reporter.Service.Membership.Contracts
 {
     public interface IUserService
     {
-        Task<IEnumerable<User>> FindAsync(string searchTerm, int page, int rpp);
     }
 }
