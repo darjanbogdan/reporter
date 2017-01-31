@@ -62,6 +62,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +73,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\ApplicationDbContext.cs" />
+    <Compile Include="Maps\ClientMap.cs" />
+    <Compile Include="Maps\ClientPermissionPolicyMap.cs" />
+    <Compile Include="Maps\ClientProjectMap.cs" />
+    <Compile Include="Maps\PermissionMap.cs" />
+    <Compile Include="Maps\PermissionPolicyMap.cs" />
+    <Compile Include="Maps\PermissionSectionMap.cs" />
+    <Compile Include="Maps\ProjectMap.cs" />
+    <Compile Include="Maps\ProjectMemberMap.cs" />
+    <Compile Include="Maps\ProjectPermissionPolicyMap.cs" />
+    <Compile Include="Maps\ReportMap.cs" />
+    <Compile Include="Maps\ReportPermissionPolicyMap.cs" />
+    <Compile Include="Maps\ReportTypeMap.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\ClientPermissionPolicy.cs" />
+    <Compile Include="Models\ClientProject.cs" />
+    <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\PermissionPolicy.cs" />
+    <Compile Include="Models\PermissionSection.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\ProjectMember.cs" />
+    <Compile Include="Models\ProjectPermissionPolicy.cs" />
+    <Compile Include="Models\Report.cs" />
+    <Compile Include="Models\ReportPermissionPolicy.cs" />
+    <Compile Include="Models\ReportType.cs" />
     <Compile Include="Identity\Manager\ApplicationUserManager.cs" />
     <Compile Include="Identity\Manager\Security\PlainPasswordHasher.cs" />
     <Compile Include="Identity\Stores\ApplicationRoleStore.cs" />
@@ -83,12 +109,13 @@
     <Compile Include="PackageRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Maps\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
