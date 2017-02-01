@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Model.Identity
+namespace Reporter.Model
 {
     public class User
     {

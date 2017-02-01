@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Serialization;
+using Reporter.WebAPI.Infrastructure.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace Reporter.WebAPI
         {
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            config.Filters.Add(new ExceptionFilter());
 
             // Web API configuration and services
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();

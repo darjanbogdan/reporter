@@ -40,11 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Identity\Account.cs" />
-    <Compile Include="Identity\AccountRegistration.cs" />
-    <Compile Include="Identity\Role.cs" />
-    <Compile Include="Identity\User.cs" />
-    <Compile Include="Identity\UserRole.cs" />
+    <Compile Include="Account.cs" />
+    <Compile Include="AccountRegistration.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -34,6 +34,10 @@
       <HintPath>..\..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SimpleInjector, Version=3.3.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SimpleInjector.3.3.2\lib\net45\SimpleInjector.dll</HintPath>
       <Private>True</Private>
@@ -52,14 +56,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\Mapper\ServiceProfile.cs" />
     <Compile Include="Membership\AccountService.cs" />
     <Compile Include="Membership\Contracts\IAccountService.cs" />
     <Compile Include="Membership\Contracts\IUserService.cs" />
+    <Compile Include="Membership\Registration\RegisterUserCommand.cs" />
+    <Compile Include="Membership\Registration\RegisterUserCommandHandler.cs" />
+    <Compile Include="Membership\Registration\RegisterUserCommandValidator.cs" />
     <Compile Include="Membership\UserService.cs" />
     <Compile Include="PackageRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Reporter.Core\Reporter.Core.csproj">
+      <Project>{E82777DF-8D66-4854-A5EF-4B8068EA782E}</Project>
+      <Name>Reporter.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Reporter.DAL\Reporter.DAL.csproj">
       <Project>{CA9F28E8-E2AA-45FA-9423-C61E17437F4E}</Project>
       <Name>Reporter.DAL</Name>

@@ -1,4 +1,4 @@
-﻿using Reporter.Model.Identity;
+﻿using Reporter.Model;
 using Reporter.Service.Membership.Contracts;
 using Reporter.WebAPI.Infrastructure.Owin.Providers;
 using System;

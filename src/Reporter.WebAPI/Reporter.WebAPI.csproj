@@ -159,8 +159,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Infrastructure\DependencyInjection\SimpleInjectorContainerFactory.cs" />
+    <Compile Include="Infrastructure\Filters\ExceptionFilter.cs" />
+    <Compile Include="Infrastructure\Mapper\WebAPIProfile.cs" />
     <Compile Include="Infrastructure\Owin\IdentityModel\ReporterJwtFormat.cs" />
     <Compile Include="Infrastructure\Owin\OwinContextExecutionScopeMiddleware.cs" />
     <Compile Include="Infrastructure\Owin\OwinContextProviderMiddleware.cs" />
@@ -186,6 +189,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Reporter.Core\Reporter.Core.csproj">
+      <Project>{E82777DF-8D66-4854-A5EF-4B8068EA782E}</Project>
+      <Name>Reporter.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Reporter.Repository\Reporter.Repository.csproj">
       <Project>{59486697-3B56-4729-8566-0FBF3BAD03FE}</Project>
       <Name>Reporter.Repository</Name>

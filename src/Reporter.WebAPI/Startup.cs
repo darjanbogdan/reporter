@@ -7,7 +7,9 @@ using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Reporter.Repository.Infrastructure.Mapper;
+using Reporter.Service.Infrastructure.Mapper;
 using Reporter.WebAPI.Infrastructure.DependencyInjection;
+using Reporter.WebAPI.Infrastructure.Mapper;
 using Reporter.WebAPI.Infrastructure.Owin;
 using Reporter.WebAPI.Infrastructure.Owin.IdentityModel;
 using Reporter.WebAPI.Infrastructure.Owin.Providers;
@@ -42,6 +44,8 @@ namespace Reporter.WebAPI
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<RepositoryProfile>();
+                cfg.AddProfile<ServiceProfile>();
+                cfg.AddProfile<WebAPIProfile>();
             });
 
             container.Register<IMapper>(() => config.CreateMapper(container.GetInstance));

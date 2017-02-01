@@ -1,5 +1,5 @@
 ﻿using Reporter.DAL.Models.Identity;
-using Reporter.Model.Identity;
+using Reporter.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +15,6 @@ namespace Reporter.Repository.Membership.Contracts
 
         Task<ApplicationUser> GetAsync(string userName, string password);
 
-        Task<ClaimsIdentity> CreateIdentityAsync(ApplicationUser user, string authenticationType);
+        Task<ClaimsIdentity> CreateIdentityAsync(Account account, string authenticationType);
     }
 }

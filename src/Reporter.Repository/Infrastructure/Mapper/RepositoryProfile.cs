@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Reporter.DAL.Models.Identity;
-using Reporter.Model.Identity;
+using Reporter.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,8 @@ namespace Reporter.Repository.Infrastructure.Mapper
 {
     public class RepositoryProfile : Profile
     {
-        public RepositoryProfile()
+        public RepositoryProfile() 
+            : base(nameof(RepositoryProfile))
         {
             var mapUserToApplicationUser = this.CreateMap<User, ApplicationUser>();
             var mapApplicationUserToUser = this.CreateMap<ApplicationUser, User>();
@@ -29,14 +30,6 @@ namespace Reporter.Repository.Infrastructure.Mapper
 
             var mapAccountRegistrationToUser = this.CreateMap<AccountRegistration, User>();
             var mapUserToAccountRegistration = this.CreateMap<User, AccountRegistration>();
-        }
-
-        public override string ProfileName
-        {
-            get
-            {
-                return nameof(RepositoryProfile);
-            }
         }
     }
 }

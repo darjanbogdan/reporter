@@ -1,4 +1,4 @@
-﻿using Reporter.Model.Identity;
+﻿using Reporter.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

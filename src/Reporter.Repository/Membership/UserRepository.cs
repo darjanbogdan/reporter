@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Reporter.DAL.Models.Identity;
-using Reporter.Model.Identity;
+using Reporter.Model;
 using Reporter.Repository.Membership.Contracts;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,6 @@
-﻿using Reporter.Service.Membership;
+﻿using Reporter.Core;
+using Reporter.Core.Validation;
+using Reporter.Service.Membership;
 using Reporter.Service.Membership.Contracts;
 using SimpleInjector;
 using SimpleInjector.Packaging;
@@ -19,6 +21,13 @@ namespace Reporter.Service
 
             container.Register<IAccountService, AccountService>();
             container.RegisterSingleton<Func<IAccountService>>(() => container.GetInstance<IAccountService>());
+
+
+            var asmList = new[] { this.GetType().Assembly };
+            
+            container.Register(typeof(ICommandHandler<>), asmList);
+            container.RegisterDecorator(typeof(ICommandHandler<>),typeof(ValidationCommandHandlerDecorator<>));
+            container.Register(typeof(ICommandValidator<>), asmList);
         }
     }
 }

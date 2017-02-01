@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Reporter.Model.Identity;
+using Reporter.Model;
 using System.Security.Claims;
 using Reporter.Repository.Membership.Contracts;
 using AutoMapper;
@@ -26,9 +26,7 @@ namespace Reporter.Service.Membership
 
         public Task<ClaimsIdentity> CreateIdentityAsync(Account account)
         {
-            var applicationUser = this.mapper.Map<ApplicationUser>(account);
-
-            return this.accountRepository.CreateIdentityAsync(applicationUser, "JWT");
+            return this.accountRepository.CreateIdentityAsync(account, "JWT");
         }
 
         public async Task<Account> GetAccountAsync(string userName, string password)

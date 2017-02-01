@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Model.Identity
+namespace Reporter.Model
 {
-    public class Role
+    public class UserRole
     {
-        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
 
-        public string Name { get; set; }
+        public Guid RoleId { get; set; }
     }
 }
