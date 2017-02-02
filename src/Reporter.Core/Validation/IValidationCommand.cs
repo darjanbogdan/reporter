@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Reporter.Core.Validation
 {
-    public interface ICommandValidator<TCommand> where TCommand : IValidationCommand
+    public interface IValidationCommand
     {
-        Task ValidateAsync(TCommand command);
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Reporter.Core.Validation
 {
-    public class ValidationCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand>
+    public class ValidationCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand> where TCommand : IValidationCommand
     {
         private readonly ICommandValidator<TCommand> validator;
         private readonly ICommandHandler<TCommand> commandHandler; //decoratee
