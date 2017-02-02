@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentValidation.Results;
 using System.Threading;
+using System.Collections;
 
 namespace Reporter.Service.Membership.Registration
 {
@@ -14,24 +15,28 @@ namespace Reporter.Service.Membership.Registration
     {
         public RegisterUserCommandValidator()
         {
-            RuleFor(registerUser => registerUser.UserName).NotEmpty().WithMessage("{PropertyName}: {0}", registerUser => "Value is required.");
+            RuleFor(registerUser => registerUser.UserName).NotEmpty().WithMessage("Value is required.");
 
-            RuleFor(registerUser => registerUser.Email).NotEmpty().WithMessage("{PropertyName}: {0}", registerUser => "Value is required.");
+            RuleFor(registerUser => registerUser.Email).NotEmpty().WithMessage("Value is required.");
 
-            RuleFor(registerUser => registerUser.FirstName).NotEmpty().WithMessage("{PropertyName}: {0}", registerUser => "Value is required.");
+            RuleFor(registerUser => registerUser.FirstName).NotEmpty().WithMessage( "Value is required.");
 
-            RuleFor(registerUser => registerUser.LastName).NotEmpty().WithMessage("{PropertyName}: {0}", registerUser => "Value is required.");
+            RuleFor(registerUser => registerUser.LastName).NotEmpty().WithMessage("Value is required.");
 
-            RuleFor(registerUser => registerUser.Password).NotEmpty().WithMessage("{PropertyName}: {0}", registerUser => "Value is required.");
+            RuleFor(registerUser => registerUser.Password).NotEmpty().WithMessage("Value is required.");
 
-            RuleFor(registerUser => registerUser.ConfirmPassword).NotEmpty().WithMessage("{PropertyName}: {0}", registerUser => "Value is required.");
+            RuleFor(registerUser => registerUser.ConfirmPassword).NotEmpty().WithMessage("Value is required.");
         }
 
         public Task ValidateAsync(RegisterUserCommand command)
         {
-            if (command == null) throw new ArgumentNullException("registerUser");
+            if (command == null) throw ValidationExceptionFactory.Create<ArgumentNullException>();
 
-            this.Validate(command);
+            var validationResult = this.Validate(command);
+            if (!validationResult.IsValid)
+            {
+                validationResult.RaiseFormattedException();
+            }
 
             return Task.FromResult(true);
         }
