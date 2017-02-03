@@ -15,27 +15,42 @@ namespace Reporter.Service.Membership.Registration
     {
         public RegisterUserCommandValidator()
         {
-            RuleFor(registerUser => registerUser.UserName).NotEmpty().WithMessage("Value is required.");
+            RuleFor(registerUser => registerUser.UserName)
+                .NotEmpty().WithMessage("Value is required.");
 
-            RuleFor(registerUser => registerUser.Email).NotEmpty().WithMessage("Value is required.");
+            RuleFor(registerUser => registerUser.Email)
+                .NotEmpty().WithMessage("Value is required.")
+                .EmailAddress().WithMessage("Value has wrong format.")
+                .Length(3, 256).WithMessage("Value is out of range.");
 
-            RuleFor(registerUser => registerUser.FirstName).NotEmpty().WithMessage( "Value is required.");
+            RuleFor(registerUser => registerUser.FirstName)
+                .NotEmpty().WithMessage( "Value is required.")
+                .Length(1, 100).WithMessage("Value is out of range.");
 
-            RuleFor(registerUser => registerUser.LastName).NotEmpty().WithMessage("Value is required.");
+            RuleFor(registerUser => registerUser.LastName)
+                .NotEmpty().WithMessage("Value is required.")
+                .Length(1, 100).WithMessage("Value is out of range.");
 
-            RuleFor(registerUser => registerUser.Password).NotEmpty().WithMessage("Value is required.");
+            RuleFor(registerUser => registerUser.Password)
+                .NotEmpty().WithMessage("Value is required.");
 
-            RuleFor(registerUser => registerUser.ConfirmPassword).NotEmpty().WithMessage("Value is required.");
-        }
+            RuleFor(registerUser => registerUser.ConfirmPassword)
+                .NotEmpty().WithMessage("Value is required.")
+                .Must((model, field) =>
+                {
+                    return field == model.Password;
+                }).WithMessage("Confirm password isn't correct.");
+                
+        }   
 
         public Task ValidateAsync(RegisterUserCommand command)
         {
-            if (command == null) throw ValidationExceptionFactory.Create<ArgumentNullException>();
+            if (command == null) throw new ValidationException("command");
 
             var validationResult = this.Validate(command);
             if (!validationResult.IsValid)
             {
-                validationResult.RaiseFormattedException();
+                throw new ValidationException(validationResult.Errors);
             }
 
             return Task.FromResult(true);
