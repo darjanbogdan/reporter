@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using FluentValidation.Results;
 using System.Threading;
 using System.Collections;
+using Reporter.Service.Infrastructure.Validator;
 
 namespace Reporter.Service.Membership.Registration
 {
@@ -45,12 +46,12 @@ namespace Reporter.Service.Membership.Registration
 
         public Task ValidateAsync(RegisterUserCommand command)
         {
-            if (command == null) throw new ValidationException("command");
+            if (command == null) throw new ValidatorException("command");
 
             var validationResult = this.Validate(command);
             if (!validationResult.IsValid)
             {
-                throw new ValidationException(validationResult.Errors);
+                throw new ValidatorException(validationResult.Errors);
             }
 
             return Task.FromResult(true);

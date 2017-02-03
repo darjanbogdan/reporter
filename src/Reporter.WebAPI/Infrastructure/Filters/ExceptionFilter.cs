@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reporter.Service.Infrastructure.Validator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -15,7 +16,7 @@ namespace Reporter.WebAPI.Infrastructure.Filters
         public override void OnException(HttpActionExecutedContext context)
         {
             var statusCode = HttpStatusCode.InternalServerError;
-            if (context.Exception is ArgumentException)
+            if (context.Exception is ValidatorException)
             {
                 statusCode = HttpStatusCode.BadRequest;
 

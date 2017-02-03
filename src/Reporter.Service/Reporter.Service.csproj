@@ -61,10 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\Mapper\ServiceProfile.cs" />
-    <Compile Include="Infrastructure\Validator\ValidationResultExtensions.cs" />
+    <Compile Include="Infrastructure\Validator\ValidatorException.cs" />
     <Compile Include="Membership\AccountService.cs" />
     <Compile Include="Membership\Contracts\IAccountService.cs" />
     <Compile Include="Membership\Contracts\IUserService.cs" />
+    <Compile Include="Membership\Login\LoginUserCommand.cs" />
     <Compile Include="Membership\Registration\RegisterUserCommand.cs" />
     <Compile Include="Membership\Registration\RegisterUserCommandHandler.cs" />
     <Compile Include="Membership\Registration\RegisterUserCommandValidator.cs" />
@@ -93,9 +94,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Membership\Login\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
