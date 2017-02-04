@@ -16,7 +16,7 @@ namespace Reporter.Repository.Membership
 {
     public class AccountRepository : IAccountRepository
     {
-        private const string joinDelimiter = "\n";
+        private const string joinDelimiter = "\r\n";
 
         private readonly UserManager<ApplicationUser, Guid> userManager;
 
@@ -28,29 +28,33 @@ namespace Reporter.Repository.Membership
             this.mapper = mapper;
         }
 
-        public async Task RegisterAsync(User user, string password)
+        public Task<Account> CreateAsync()
         {
-            var appUser = this.mapper.Map<ApplicationUser>(user);
+            var account = new Account();
+            account.User = new User();
+            account.User.Id = Guid.NewGuid(); //TODO: Replace with sequential guid
+            return Task.FromResult(account);
+        }
 
-            IdentityResult result = null;
-            try
-            {
-                result = await this.userManager.CreateAsync(appUser, password);
-            }
-            catch (DbEntityValidationException ex)
-            {
-                var validationErrors = ex.EntityValidationErrors.Where(ev => !ev.IsValid).SelectMany(ev => ev.ValidationErrors);
+        public async Task RegisterAsync(Account account, string password)
+        {
+            var appUser = this.mapper.Map<ApplicationUser>(account); //TODO: Check this
 
-                var validationErrorMessages = validationErrors.Select(ve => String.Format("{0}: {1}", ve.PropertyName, ve.ErrorMessage));
-
-                throw new ArgumentException(String.Join(joinDelimiter, validationErrorMessages));
-            }
-
+            var result = await this.userManager.CreateAsync(appUser, password);
             if (!result.Succeeded)
             {
                 throw new ArgumentException(String.Join(joinDelimiter, result.Errors));
             }
+
+            if (account.User.Roles != null && account.User.Roles.Any())
+            {
+                await this.userManager.AddToRolesAsync(appUser.Id, account.User.Roles.Select(r => r.Name).ToArray());
+            }
         }
+
+        //TODO: AddToRoles dedicated method
+
+        //TODO: AddClaims dedicated method
 
         public async Task<Account> GetAsync(string userName, string password)
         {
@@ -68,10 +72,9 @@ namespace Reporter.Repository.Membership
 
             var userIdentity = await this.userManager.CreateIdentityAsync(appUser, authenticationType);
 
-
             foreach (var role in account.User.Roles)
             {
-                userIdentity.AddClaim(new Claim(ClaimTypes.Role, role.RoleId.ToString()));
+                userIdentity.AddClaim(new Claim(ClaimTypes.Role, role.Id.ToString()));
             }
 
             return userIdentity;

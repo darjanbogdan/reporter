@@ -16,7 +16,7 @@ namespace Reporter.Model
 
         public virtual Guid Id { get; set; }
 
-        public virtual IEnumerable<UserRole> Roles { get; set; }
+        public virtual IEnumerable<Role> Roles { get; set; }
 
         public virtual string UserName { get; set; }
     }

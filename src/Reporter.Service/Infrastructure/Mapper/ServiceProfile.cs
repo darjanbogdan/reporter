@@ -14,7 +14,9 @@ namespace Reporter.Service.Infrastructure.Mapper
         public ServiceProfile() 
             : base(nameof(ServiceProfile))
         {
-            var mapFromRegisterUserCommand = CreateMap<RegisterUserCommand, User>();
+            var mapUserFromRegisterUserCommand = CreateMap<RegisterUserCommand, User>();
+            var mapAccountFromRegisterUserCommand = CreateMap<RegisterUserCommand, Account>();
+            mapAccountFromRegisterUserCommand.ForMember(dest => dest.User, opt => opt.MapFrom(src => src));
         }
     }
 }

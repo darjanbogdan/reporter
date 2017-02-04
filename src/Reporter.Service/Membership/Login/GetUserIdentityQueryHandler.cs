@@ -13,12 +13,10 @@ namespace Reporter.Service.Membership.Login
     public class GetUserIdentityQueryHandler : IQueryHandler<GetUserIdentityQuery, GetUserIdentityResult>
     {
         private readonly IAccountRepository accountRepository;
-        private readonly IUserRepository userRepository;
-
-        public GetUserIdentityQueryHandler(IAccountRepository accountRepository, IUserRepository userRepository)
+        
+        public GetUserIdentityQueryHandler(IAccountRepository accountRepository)
         {
             this.accountRepository = accountRepository;
-            this.userRepository = userRepository;
         }
 
         public async Task<GetUserIdentityResult> RunAsync(GetUserIdentityQuery query)

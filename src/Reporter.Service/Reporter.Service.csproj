@@ -62,16 +62,12 @@
   <ItemGroup>
     <Compile Include="Infrastructure\Mapper\ServiceProfile.cs" />
     <Compile Include="Infrastructure\Validator\ValidatorException.cs" />
-    <Compile Include="Membership\AccountService.cs" />
-    <Compile Include="Membership\Contracts\IAccountService.cs" />
-    <Compile Include="Membership\Contracts\IUserService.cs" />
     <Compile Include="Membership\Login\GetUserIdentityQuery.cs" />
     <Compile Include="Membership\Login\GetUserIdentityQueryHandler.cs" />
     <Compile Include="Membership\Login\GetUserIdentityResult.cs" />
     <Compile Include="Membership\Registration\RegisterUserCommand.cs" />
     <Compile Include="Membership\Registration\RegisterUserCommandHandler.cs" />
     <Compile Include="Membership\Registration\RegisterUserCommandValidator.cs" />
-    <Compile Include="Membership\UserService.cs" />
     <Compile Include="PackageRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

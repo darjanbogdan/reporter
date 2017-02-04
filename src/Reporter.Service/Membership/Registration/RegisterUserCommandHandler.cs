@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Reporter.Core.Command;
+using Reporter.Model;
 using Reporter.Repository.Membership.Contracts;
 using System;
 using System.Collections.Generic;
@@ -12,24 +13,33 @@ namespace Reporter.Service.Membership.Registration
     public class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand>
     {
         private readonly IAccountRepository accountRepository;
-        private readonly IUserRepository userRepository;
         private readonly IMapper mapper;
 
-
-        public RegisterUserCommandHandler(IAccountRepository accountRepository, IUserRepository userRepository, IMapper mapper)
+        public RegisterUserCommandHandler(IAccountRepository accountRepository, IMapper mapper)
         {
             this.accountRepository = accountRepository;
-            this.userRepository = userRepository;
             this.mapper = mapper;
         }
 
         public async Task ExecuteAsync(RegisterUserCommand command)
         {
-            var user = await this.userRepository.CreateAsync();
+            var account = await this.accountRepository.CreateAsync();
 
-            this.mapper.Map(command, user);
+            this.mapper.Map(command, account);
 
-            await this.accountRepository.RegisterAsync(user, command.Password);
+            //TODO: Replace this with activation account logic
+            account.EmailConfirmed = true;
+
+            var roles = new List<Role>();
+            account.User.Roles = roles;
+            var userRole = new Role()
+            {
+                Id = new Guid("21079E62-E12C-47D4-A6D6-16352BB8EBAA"),
+                Name = "User"
+            };
+            roles.Add(userRole);
+
+            await this.accountRepository.RegisterAsync(account, command.Password);
         }
     }
 }

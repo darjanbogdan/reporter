@@ -160,7 +160,6 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Infrastructure\DependencyInjection\SimpleInjectorContainerFactory.cs" />
     <Compile Include="Infrastructure\Filters\ExceptionFilter.cs" />
     <Compile Include="Infrastructure\Mapper\WebAPIProfile.cs" />

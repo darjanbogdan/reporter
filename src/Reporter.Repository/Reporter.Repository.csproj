@@ -71,8 +71,6 @@
   <ItemGroup>
     <Compile Include="Membership\AccountRepository.cs" />
     <Compile Include="Membership\Contracts\IAccountRepository.cs" />
-    <Compile Include="Membership\Contracts\IUserRepository.cs" />
-    <Compile Include="Membership\UserRepository.cs" />
     <Compile Include="Infrastructure\Mapper\RepositoryProfile.cs" />
     <Compile Include="PackageRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

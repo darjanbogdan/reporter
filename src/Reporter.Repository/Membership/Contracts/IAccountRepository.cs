@@ -11,7 +11,9 @@ namespace Reporter.Repository.Membership.Contracts
 {
     public interface IAccountRepository
     {
-        Task RegisterAsync(User user, string password);
+        Task<Account> CreateAsync();
+
+        Task RegisterAsync(Account user, string password);
 
         Task<Account> GetAsync(string userName, string password);
 

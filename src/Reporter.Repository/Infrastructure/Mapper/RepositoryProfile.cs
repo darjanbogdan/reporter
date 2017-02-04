@@ -17,6 +17,9 @@ namespace Reporter.Repository.Infrastructure.Mapper
             var mapUserToApplicationUser = this.CreateMap<User, ApplicationUser>();
             var mapApplicationUserToUser = this.CreateMap<ApplicationUser, User>();
 
+            var mapRoleToApplicationRole = this.CreateMap<Role, ApplicationRole>();
+            var mapApplicationRoleToRole = this.CreateMap<ApplicationRole, Role>();
+
             var mapApplicationUserToAccount = this.CreateMap<ApplicationUser, Account>();
             mapApplicationUserToAccount.ForMember(dest => dest.User, opt => opt.MapFrom(src => src));
 
@@ -26,10 +29,6 @@ namespace Reporter.Repository.Infrastructure.Mapper
             mapAccountToApplicationUser.ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName));
             mapAccountToApplicationUser.ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
             mapAccountToApplicationUser.ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
-            mapAccountToApplicationUser.ForMember(dest => dest.Roles, opt => opt.MapFrom(src => src.User.Roles));
-
-            var mapAccountRegistrationToUser = this.CreateMap<AccountRegistration, User>();
-            var mapUserToAccountRegistration = this.CreateMap<User, AccountRegistration>();
         }
     }
 }

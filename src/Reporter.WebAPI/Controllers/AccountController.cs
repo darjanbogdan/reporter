@@ -36,6 +36,10 @@ namespace Reporter.WebAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.Created);
         }
 
+        //TODO: Implement account activation (opt-in)
+        //TODO: Implement change password and/or forgot password (opt-in) 
+        //TODO: Implement change email (opt-in) ?
+
         public class RegisterUser
         {
             public string UserName { get; set; }
