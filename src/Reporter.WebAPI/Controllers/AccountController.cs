@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Reporter.Core;
+using Reporter.Core.Command;
 using Reporter.Service.Membership.Registration;
 using System;
 using System.Collections.Generic;

@@ -6,7 +6,7 @@ using Microsoft.Owin.Security.DataHandler.Encoder;
 using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using Reporter.Core;
+using Reporter.Core.Query;
 using Reporter.Repository.Infrastructure.Mapper;
 using Reporter.Service.Infrastructure.Mapper;
 using Reporter.Service.Membership.Login;

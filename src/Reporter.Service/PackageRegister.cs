@@ -1,5 +1,6 @@
-﻿using Reporter.Core;
+﻿using Reporter.Core.Command;
 using Reporter.Core.Command.Validation;
+using Reporter.Core.Query;
 using Reporter.Service.Membership;
 using Reporter.Service.Membership.Contracts;
 using SimpleInjector;

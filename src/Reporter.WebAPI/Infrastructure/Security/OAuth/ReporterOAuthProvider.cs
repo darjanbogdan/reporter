@@ -1,6 +1,6 @@
 ﻿using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
-using Reporter.Core;
+using Reporter.Core.Query;
 using Reporter.Service.Membership.Contracts;
 using Reporter.Service.Membership.Login;
 using System;

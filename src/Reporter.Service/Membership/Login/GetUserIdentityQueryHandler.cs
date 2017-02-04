@@ -1,4 +1,4 @@
-﻿using Reporter.Core;
+﻿using Reporter.Core.Query;
 using Reporter.Model;
 using Reporter.Repository.Membership.Contracts;
 using System;
