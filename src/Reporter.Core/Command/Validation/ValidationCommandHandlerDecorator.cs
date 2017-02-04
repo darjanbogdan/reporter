@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Core.Validation
+namespace Reporter.Core.Command.Validation
 {
     public class ValidationCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand> where TCommand : IValidationCommand
     {

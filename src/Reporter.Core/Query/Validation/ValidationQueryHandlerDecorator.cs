@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Core.Validation
+namespace Reporter.Core.Query.Validation
 {
     public class ValidationQueryHandlerDecorator<TQuery, TResult> : IQueryHandler<TQuery, TResult> 
         where TQuery: IQuery<TResult>

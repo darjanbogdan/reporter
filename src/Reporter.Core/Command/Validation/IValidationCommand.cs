@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Core.Validation.Query
+namespace Reporter.Core.Command.Validation
 {
-    public interface IQueryValidator<TQuery, TResult> where TQuery : IQuery<TResult>
+    public interface IValidationCommand
     {
     }
 }

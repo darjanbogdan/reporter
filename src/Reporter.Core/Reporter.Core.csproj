@@ -40,22 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICommandHandler.cs" />
-    <Compile Include="IQuery.cs" />
-    <Compile Include="IQueryHandler.cs" />
+    <Compile Include="Command\ICommandHandler.cs" />
+    <Compile Include="Query\IQuery.cs" />
+    <Compile Include="Query\IQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validation\Command\ICommandValidator.cs" />
-    <Compile Include="Validation\Command\IValidationCommand.cs" />
-    <Compile Include="Validation\Query\IQueryValidator.cs" />
-    <Compile Include="Validation\Query\IValidationQuery.cs" />
-    <Compile Include="Validation\Command\ValidationCommandHandlerDecorator.cs" />
-    <Compile Include="Validation\Query\ValidationQueryHandlerDecorator.cs" />
+    <Compile Include="Command\Validation\ICommandValidator.cs" />
+    <Compile Include="Command\Validation\IValidationCommand.cs" />
+    <Compile Include="Query\Validation\IQueryValidator.cs" />
+    <Compile Include="Query\Validation\IValidationQuery.cs" />
+    <Compile Include="Command\Validation\ValidationCommandHandlerDecorator.cs" />
+    <Compile Include="Query\Validation\ValidationQueryHandlerDecorator.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Authorization\" />
-    <Folder Include="Caching\" />
-    <Folder Include="Logging\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

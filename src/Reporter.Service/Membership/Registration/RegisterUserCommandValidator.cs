@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Reporter.Core.Validation;
+using Reporter.Core.Command.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
