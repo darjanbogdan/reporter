@@ -31,7 +31,7 @@ namespace Reporter.WebAPI.Controllers
         {
             var command = this.mapper.Map<RegisterUserCommand>(registerUser);
 
-            await this.registerUserCommandHandler.HandleAsync(command);
+            await this.registerUserCommandHandler.ExecuteAsync(command);
 
             return Request.CreateResponse(HttpStatusCode.Created);
         }

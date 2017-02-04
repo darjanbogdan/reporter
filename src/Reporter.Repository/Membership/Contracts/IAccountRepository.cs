@@ -13,7 +13,9 @@ namespace Reporter.Repository.Membership.Contracts
     {
         Task RegisterAsync(User user, string password);
 
-        Task<ApplicationUser> GetAsync(string userName, string password);
+        Task<Account> GetAsync(string userName, string password);
+
+        Task<IEnumerable<Claim>> GetIdentityClaimsAsync(Guid userId);
 
         Task<ClaimsIdentity> CreateIdentityAsync(Account account, string authenticationType);
     }

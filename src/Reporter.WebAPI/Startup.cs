@@ -6,8 +6,10 @@ using Microsoft.Owin.Security.DataHandler.Encoder;
 using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
+using Reporter.Core;
 using Reporter.Repository.Infrastructure.Mapper;
 using Reporter.Service.Infrastructure.Mapper;
+using Reporter.Service.Membership.Login;
 using Reporter.WebAPI.Infrastructure.DependencyInjection;
 using Reporter.WebAPI.Infrastructure.Mapper;
 using Reporter.WebAPI.Infrastructure.Owin;
@@ -70,9 +72,13 @@ namespace Reporter.WebAPI
 
             app.UseOwinContextExecutionScope(container);
 
+            #region OAuth2
+
             ConfigureOAuthTokenGeneration(app, container);
 
             ConfigureOAuthTokenConsumption(app);
+
+            #endregion OAuth2
 
             app.UseOwinContextProvider();
 
@@ -89,7 +95,7 @@ namespace Reporter.WebAPI
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/login"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = container.GetInstance<ReporterOAuthProvider>(),
+                Provider = new ReporterOAuthProvider(() => container.GetInstance<IQueryHandler<GetUserIdentityQuery, GetUserIdentityResult>>()),
                 AccessTokenFormat = new ReporterJwtFormat("http://reporter.local", null)
             };
 

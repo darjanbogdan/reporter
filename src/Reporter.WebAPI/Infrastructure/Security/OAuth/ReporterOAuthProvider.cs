@@ -1,6 +1,8 @@
 ﻿using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
+using Reporter.Core;
 using Reporter.Service.Membership.Contracts;
+using Reporter.Service.Membership.Login;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,43 +14,33 @@ namespace Reporter.WebAPI.Infrastructure.Security.OAuth
 {
     public class ReporterOAuthProvider : OAuthAuthorizationServerProvider
     {
-        private readonly Func<IAccountService> accountServiceFactory;
+        private const string allowedOrigin = "*";
 
-        public ReporterOAuthProvider(Func<IAccountService> accountServiceFactory)
+        private readonly Func<IQueryHandler<GetUserIdentityQuery, GetUserIdentityResult>> getUserIdentityQueryFactory;
+
+        public ReporterOAuthProvider(Func<IQueryHandler<GetUserIdentityQuery, GetUserIdentityResult>> getUserIdentityQueryFactory)
         {
-            this.accountServiceFactory = accountServiceFactory;
+            this.getUserIdentityQueryFactory = getUserIdentityQueryFactory;
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var allowedOrigin = "*";
-
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-            var accountService = this.accountServiceFactory.Invoke();
-
-            var user = await accountService.GetAccountAsync(context.UserName, context.Password);
-
-            if (user == null)
+            var query = new GetUserIdentityQuery()
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                UserName = context.UserName,
+                Password = context.Password
+            };
+
+            var result = await this.getUserIdentityQueryFactory.Invoke().RunAsync(query);
+            if (result.IsError)
+            {
+                context.SetError(result.ErrorResponse, result.ErrorDescription);
                 return;
             }
 
-            if (!user.EmailConfirmed)
-            {
-                context.SetError("invalid_grant", "User did not confirm email.");
-                return;
-            }
-
-            ClaimsIdentity oAuthIdentity = await accountService.CreateIdentityAsync(user);
-
-            foreach (var role in user.User.Roles)
-            {
-                oAuthIdentity.AddClaims(new[] { new Claim(ClaimTypes.Role, role.RoleId.ToString()) });
-            }
-
-            var ticket = new AuthenticationTicket(oAuthIdentity, null);
+            var ticket = new AuthenticationTicket(result.ClaimsIdentity, null);
 
             context.Validated(ticket);
         }

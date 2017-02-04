@@ -1,4 +1,6 @@
-﻿using Reporter.WebAPI.Infrastructure.Security.OAuth;
+﻿using Reporter.Core;
+using Reporter.Service.Membership.Login;
+using Reporter.WebAPI.Infrastructure.Security.OAuth;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 using System;
@@ -12,7 +14,6 @@ namespace Reporter.WebAPI
     {
         public void RegisterServices(Container container)
         {
-            container.Register<ReporterOAuthProvider>();
         }
     }
 }

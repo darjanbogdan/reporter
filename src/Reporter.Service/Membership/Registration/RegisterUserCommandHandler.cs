@@ -23,7 +23,7 @@ namespace Reporter.Service.Membership.Registration
             this.mapper = mapper;
         }
 
-        public async Task HandleAsync(RegisterUserCommand command)
+        public async Task ExecuteAsync(RegisterUserCommand command)
         {
             var user = await this.userRepository.CreateAsync();
 

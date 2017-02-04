@@ -4,6 +4,7 @@ using Reporter.DAL.Models.Identity;
 using Reporter.Model;
 using Reporter.Repository.Membership.Contracts;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
@@ -51,9 +52,14 @@ namespace Reporter.Repository.Membership
             }
         }
 
-        public Task<ApplicationUser> GetAsync(string userName, string password)
+        public async Task<Account> GetAsync(string userName, string password)
         {
-            return this.userManager.FindAsync(userName, password);
+            return this.mapper.Map<Account>(await this.userManager.FindAsync(userName, password));
+        }
+
+        public async Task<IEnumerable<Claim>> GetIdentityClaimsAsync(Guid userId)
+        {
+            return await this.userManager.GetClaimsAsync(userId);
         }
 
         public async Task<ClaimsIdentity> CreateIdentityAsync(Account account, string authenticationType)

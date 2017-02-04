@@ -28,6 +28,8 @@ namespace Reporter.Service
             container.Register(typeof(ICommandHandler<>), asmList);
             container.RegisterDecorator(typeof(ICommandHandler<>),typeof(ValidationCommandHandlerDecorator<>));
             container.Register(typeof(ICommandValidator<>), asmList);
+
+            container.Register(typeof(IQueryHandler<,>), asmList);
         }
     }
 }

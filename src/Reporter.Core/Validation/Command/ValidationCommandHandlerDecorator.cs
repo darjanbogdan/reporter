@@ -17,11 +17,11 @@ namespace Reporter.Core.Validation
             this.commandHandler = commandHandler;
         }
 
-        public async Task HandleAsync(TCommand command)
+        public async Task ExecuteAsync(TCommand command)
         {
             await this.validator.ValidateAsync(command);
 
-            await this.commandHandler.HandleAsync(command);
+            await this.commandHandler.ExecuteAsync(command);
         }
     }
 }
