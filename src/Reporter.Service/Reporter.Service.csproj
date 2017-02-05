@@ -62,6 +62,8 @@
   <ItemGroup>
     <Compile Include="Infrastructure\Mapper\ServiceProfile.cs" />
     <Compile Include="Infrastructure\Validator\ValidatorException.cs" />
+    <Compile Include="Lookups\ILookup.cs" />
+    <Compile Include="Lookups\IRoleLookup.cs" />
     <Compile Include="Membership\Login\GetUserIdentityQuery.cs" />
     <Compile Include="Membership\Login\GetUserIdentityQueryHandler.cs" />
     <Compile Include="Membership\Login\GetUserIdentityResult.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="Membership\Registration\RegisterUserCommandValidator.cs" />
     <Compile Include="PackageRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Lookups\RoleLookup.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Reporter.Core\Reporter.Core.csproj">

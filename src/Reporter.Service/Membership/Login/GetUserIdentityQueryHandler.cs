@@ -13,7 +13,7 @@ namespace Reporter.Service.Membership.Login
     public class GetUserIdentityQueryHandler : IQueryHandler<GetUserIdentityQuery, GetUserIdentityResult>
     {
         private readonly IAccountRepository accountRepository;
-        
+
         public GetUserIdentityQueryHandler(IAccountRepository accountRepository)
         {
             this.accountRepository = accountRepository;
@@ -46,9 +46,7 @@ namespace Reporter.Service.Membership.Login
             }
             else
             {
-                ClaimsIdentity identity = await this.accountRepository.CreateIdentityAsync(account, "JWT");
-                identity.AddClaims(await this.accountRepository.GetIdentityClaimsAsync(account.User.Id));
-                result.ClaimsIdentity = identity;
+                result.ClaimsIdentity = await this.accountRepository.CreateIdentityAsync(account, "JWT");
             }
             return result;
         }

@@ -1,6 +1,7 @@
 ﻿using Reporter.Core.Command;
 using Reporter.Core.Command.Validation;
 using Reporter.Core.Query;
+using Reporter.Service.Lookups;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 using System;
@@ -16,12 +17,14 @@ namespace Reporter.Service
         public void RegisterServices(Container container)
         {
             var asmList = new[] { this.GetType().Assembly };
-            
+
             container.Register(typeof(ICommandHandler<>), asmList);
-            container.RegisterDecorator(typeof(ICommandHandler<>),typeof(ValidationCommandHandlerDecorator<>));
+            container.RegisterDecorator(typeof(ICommandHandler<>), typeof(ValidationCommandHandlerDecorator<>));
             container.Register(typeof(ICommandValidator<>), asmList);
 
             container.Register(typeof(IQueryHandler<,>), asmList);
+
+            container.Register<IRoleLookup, RoleLookup>();
         }
     }
 }

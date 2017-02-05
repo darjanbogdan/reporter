@@ -45,39 +45,31 @@ namespace Reporter.Repository.Membership
             {
                 throw new ArgumentException(String.Join(joinDelimiter, result.Errors));
             }
-
-            if (account.User.Roles != null && account.User.Roles.Any())
-            {
-                await this.userManager.AddToRolesAsync(appUser.Id, account.User.Roles.Select(r => r.Name).ToArray());
-            }
         }
 
-        //TODO: AddToRoles dedicated method
+        public async Task InsertUserRolesAsync(Guid userId, IEnumerable<Role> roles)
+        {
+            if (roles == null) throw new ArgumentNullException(nameof(roles));
 
-        //TODO: AddClaims dedicated method
+            var result = await this.userManager.AddToRolesAsync(userId, roles.Select(r => r.Name).ToArray());
+            if (!result.Succeeded)
+            {
+                throw new ArgumentException(String.Join(joinDelimiter, result.Errors));
+            }
+        }
 
         public async Task<Account> GetAsync(string userName, string password)
         {
-            return this.mapper.Map<Account>(await this.userManager.FindAsync(userName, password));
+            var appUser = await this.userManager.FindAsync(userName, password);
+
+            return this.mapper.Map<Account>(appUser);
         }
 
-        public async Task<IEnumerable<Claim>> GetIdentityClaimsAsync(Guid userId)
-        {
-            return await this.userManager.GetClaimsAsync(userId);
-        }
-
-        public async Task<ClaimsIdentity> CreateIdentityAsync(Account account, string authenticationType)
+        public Task<ClaimsIdentity> CreateIdentityAsync(Account account, string authenticationType)
         {
             var appUser = this.mapper.Map<ApplicationUser>(account);
 
-            var userIdentity = await this.userManager.CreateIdentityAsync(appUser, authenticationType);
-
-            foreach (var role in account.User.Roles)
-            {
-                userIdentity.AddClaim(new Claim(ClaimTypes.Role, role.Id.ToString()));
-            }
-
-            return userIdentity;
+            return this.userManager.CreateIdentityAsync(appUser, authenticationType);
         }
     }
 }

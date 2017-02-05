@@ -2,9 +2,11 @@
 using Reporter.Core.Command;
 using Reporter.Model;
 using Reporter.Repository.Membership.Contracts;
+using Reporter.Service.Lookups;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,11 +15,13 @@ namespace Reporter.Service.Membership.Registration
     public class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand>
     {
         private readonly IAccountRepository accountRepository;
+        private readonly IRoleLookup roleLookup;
         private readonly IMapper mapper;
 
-        public RegisterUserCommandHandler(IAccountRepository accountRepository, IMapper mapper)
+        public RegisterUserCommandHandler(IAccountRepository accountRepository, IRoleLookup roleLookup, IMapper mapper)
         {
             this.accountRepository = accountRepository;
+            this.roleLookup = roleLookup;
             this.mapper = mapper;
         }
 
@@ -30,16 +34,11 @@ namespace Reporter.Service.Membership.Registration
             //TODO: Replace this with activation account logic
             account.EmailConfirmed = true;
 
-            var roles = new List<Role>();
-            account.User.Roles = roles;
-            var userRole = new Role()
-            {
-                Id = new Guid("21079E62-E12C-47D4-A6D6-16352BB8EBAA"),
-                Name = "User"
-            };
-            roles.Add(userRole);
-
             await this.accountRepository.RegisterAsync(account, command.Password);
+
+            var userRole = await this.roleLookup.GetUserRoleAsync();
+
+            await this.accountRepository.InsertUserRolesAsync(account.User.Id, new[] { userRole });
         }
     }
 }

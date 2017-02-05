@@ -11,7 +11,7 @@ namespace Reporter.Repository.Infrastructure.Mapper
 {
     public class RepositoryProfile : Profile
     {
-        public RepositoryProfile() 
+        public RepositoryProfile()
             : base(nameof(RepositoryProfile))
         {
             var mapUserToApplicationUser = this.CreateMap<User, ApplicationUser>();
@@ -20,8 +20,12 @@ namespace Reporter.Repository.Infrastructure.Mapper
             var mapRoleToApplicationRole = this.CreateMap<Role, ApplicationRole>();
             var mapApplicationRoleToRole = this.CreateMap<ApplicationRole, Role>();
 
+            var maApplicationUserRoleToRole = this.CreateMap<ApplicationUserRole, Role>();
+            maApplicationUserRoleToRole.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RoleId));
+
             var mapApplicationUserToAccount = this.CreateMap<ApplicationUser, Account>();
             mapApplicationUserToAccount.ForMember(dest => dest.User, opt => opt.MapFrom(src => src));
+            mapApplicationUserToAccount.ForSourceMember(src => src.Roles, opt => opt.Ignore());
 
             var mapAccountToApplicationUser = this.CreateMap<Account, ApplicationUser>();
             mapAccountToApplicationUser.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.User.Id));
@@ -29,6 +33,7 @@ namespace Reporter.Repository.Infrastructure.Mapper
             mapAccountToApplicationUser.ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName));
             mapAccountToApplicationUser.ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
             mapAccountToApplicationUser.ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
+            mapAccountToApplicationUser.ForMember(dest => dest.Roles, opt => opt.Ignore());
         }
     }
 }
