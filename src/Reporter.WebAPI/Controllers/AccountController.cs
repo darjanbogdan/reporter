@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Reporter.Core.Command;
 using Reporter.Service.Membership.Registration;
+using Reporter.WebAPI.Infrastructure.Owin.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,12 @@ namespace Reporter.WebAPI.Controllers
     {
         private readonly ICommandHandler<RegisterUserCommand> registerUserCommandHandler;
         private readonly IMapper mapper;
+        private readonly IOwinContextProvider owinContextProvider;
 
-
-        public AccountController(ICommandHandler<RegisterUserCommand> registerUserCommandHandler, IMapper mapper)
+        public AccountController(ICommandHandler<RegisterUserCommand> registerUserCommandHandler, IOwinContextProvider owinContextProvider, IMapper mapper)
         {
             this.registerUserCommandHandler = registerUserCommandHandler;
+            this.owinContextProvider = owinContextProvider;
             this.mapper = mapper;
         }
 
@@ -36,8 +38,16 @@ namespace Reporter.WebAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.Created);
         }
 
+        [Route("test")]
+        [HttpGet]
+        public async Task<HttpResponseMessage> TestAsync()
+        {
+            var ctx = this.owinContextProvider.CurrentContext;
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
         //TODO: Implement account activation (opt-in)
-        //TODO: Implement change password and/or forgot password (opt-in) 
+        //TODO: Implement change password and/or forgot password (opt-in)
         //TODO: Implement change email (opt-in) ?
 
         public class RegisterUser

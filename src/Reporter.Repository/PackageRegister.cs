@@ -14,7 +14,8 @@ namespace Reporter.Repository
     {
         public void RegisterServices(Container container)
         {
-            container.Register<IAccountRepository, AccountRepository>(Lifestyle.Transient);
+            container.Register<IAccountRepository, AccountRepository>();
+            container.Register<IRoleRepository, RoleRepository>();
         }
     }
 }
