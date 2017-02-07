@@ -2,7 +2,7 @@
 using Reporter.Core.Command;
 using Reporter.Model;
 using Reporter.Repository.Membership.Contracts;
-using Reporter.Service.Lookups;
+using Reporter.Service.Membership.Lookups;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Service.Lookups
+namespace Reporter.Service.Infrastructure.Lookups
 {
-    public interface ILookup<TResource>
+    public interface IResourceLookup<TResource>
     {
         Task<IEnumerable<TResource>> GetAllAsync();
+
+        Task<TResource> GetAsync(string abrv);
     }
 }

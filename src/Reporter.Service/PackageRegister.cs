@@ -1,7 +1,8 @@
 ﻿using Reporter.Core.Command;
 using Reporter.Core.Command.Validation;
 using Reporter.Core.Query;
-using Reporter.Service.Lookups;
+using Reporter.Service.Infrastructure.Lookups;
+using Reporter.Service.Membership.Lookups;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 using System;
@@ -24,7 +25,7 @@ namespace Reporter.Service
 
             container.Register(typeof(IQueryHandler<,>), asmList);
 
-            container.Register<IRoleLookup, RoleLookup>();
+            container.Register(typeof(IResourceLookup<>), asmList);
         }
     }
 }

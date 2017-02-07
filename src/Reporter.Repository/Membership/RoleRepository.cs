@@ -23,7 +23,7 @@ namespace Reporter.Repository.Membership
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<Role>> GetAllAsync()
+        public async Task<IEnumerable<Role>> FindAsync()
         {
             var roles = await this.context.Set<ApplicationRole>().ToListAsync();
 

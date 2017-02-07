@@ -40,7 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\Authorization\AuthenticationCommandHandlerDecorator.cs" />
+    <Compile Include="Command\Authorization\AuthorizationCommandHandlerDecorator.cs" />
+    <Compile Include="Command\Authorization\IAuthorizationCommand.cs" />
+    <Compile Include="Command\Authorization\IPermissionManager.cs" />
     <Compile Include="Command\ICommandHandler.cs" />
+    <Compile Include="Context\IApplicationContext.cs" />
+    <Compile Include="Context\IUserInfo.cs" />
     <Compile Include="Query\IQuery.cs" />
     <Compile Include="Query\IQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

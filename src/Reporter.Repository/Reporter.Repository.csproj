@@ -76,6 +76,8 @@
     <Compile Include="Membership\RoleRepository.cs" />
     <Compile Include="PackageRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\Contracts\IPermissionRepository.cs" />
+    <Compile Include="Security\Contracts\IPermissionSectionRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

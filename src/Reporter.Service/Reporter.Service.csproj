@@ -60,10 +60,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\Lookups\IResourceLookup.cs" />
     <Compile Include="Infrastructure\Mapper\ServiceProfile.cs" />
     <Compile Include="Infrastructure\Validator\ValidatorException.cs" />
-    <Compile Include="Lookups\ILookup.cs" />
-    <Compile Include="Lookups\IRoleLookup.cs" />
+    <Compile Include="Membership\Constants.cs" />
+    <Compile Include="Membership\Lookups\IRoleLookup.cs" />
     <Compile Include="Membership\Login\GetUserIdentityQuery.cs" />
     <Compile Include="Membership\Login\GetUserIdentityQueryHandler.cs" />
     <Compile Include="Membership\Login\GetUserIdentityResult.cs" />
@@ -72,16 +73,20 @@
     <Compile Include="Membership\Registration\RegisterUserCommandValidator.cs" />
     <Compile Include="PackageRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Lookups\RoleLookup.cs" />
+    <Compile Include="Membership\Lookups\RoleLookup.cs" />
+    <Compile Include="Security\Constants.cs" />
+    <Compile Include="Security\Lookups\Contracts\IPermissionLookup.cs" />
+    <Compile Include="Security\Contracts\IPermissionPolicyResolver.cs" />
+    <Compile Include="Security\Lookups\Contracts\IPermissionSectionLookup.cs" />
+    <Compile Include="Security\Lookups\PermissionSectionLookup.cs" />
+    <Compile Include="Security\Lookups\PermissionLookup.cs" />
+    <Compile Include="Security\PermissionManager.cs" />
+    <Compile Include="Security\PermissionPolicyResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Reporter.Core\Reporter.Core.csproj">
       <Project>{E82777DF-8D66-4854-A5EF-4B8068EA782E}</Project>
       <Name>Reporter.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Reporter.DAL\Reporter.DAL.csproj">
-      <Project>{CA9F28E8-E2AA-45FA-9423-C61E17437F4E}</Project>
-      <Name>Reporter.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Reporter.Repository\Reporter.Repository.csproj">
       <Project>{59486697-3B56-4729-8566-0FBF3BAD03FE}</Project>

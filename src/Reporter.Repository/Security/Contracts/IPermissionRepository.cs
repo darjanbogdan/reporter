@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Repository.Membership.Contracts
+namespace Reporter.Repository.Security.Contracts
 {
-    public interface IRoleRepository
+    public interface IPermissionRepository
     {
-        Task<IEnumerable<Role>> FindAsync();
+        Task<IEnumerable<Permission>> FindAsync();
     }
 }

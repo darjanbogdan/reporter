@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Service.Lookups
+namespace Reporter.Service.Membership.Lookups
 {
     public class RoleLookup : IRoleLookup
     {
@@ -20,19 +20,25 @@ namespace Reporter.Service.Lookups
         //TODO: Implement caching
         public Task<IEnumerable<Role>> GetAllAsync()
         {
-            return this.roleRepository.GetAllAsync();
+            return this.roleRepository.FindAsync();
         }
 
-        public async Task<Role> GetUserRoleAsync()
+        public async Task<Role> GetAsync(string abrv)
         {
             var roles = await this.GetAllAsync();
-            return roles.FirstOrDefault(r => r.Name == "User");
+            return roles.FirstOrDefault(r => r.Name == abrv);
         }
 
-        public async Task<Role> GetAdminRoleAsync()
+        public Task<Role> GetUserRoleAsync()
         {
-            var roles = await this.GetAllAsync();
-            return roles.FirstOrDefault(r => r.Name == "Administrator");
+            return GetAsync(RoleMap.User);
         }
+
+        public Task<Role> GetAdminRoleAsync()
+        {
+            return GetAsync(RoleMap.Administrator);
+        }
+
+        
     }
 }
