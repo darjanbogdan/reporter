@@ -9,17 +9,18 @@ using Reporter.Service.Membership.Lookups;
 using Reporter.Service.Security.Lookups.Contracts;
 using Reporter.Core.Command.Authorization;
 using Reporter.Core.Context;
+using Reporter.Service.Infrastructure.Lookups;
 
 namespace Reporter.Service.Security
 {
-    public class PermissionPolicyResolver : IPermissionPolicyResolver
+    public class PermissionPolicyComposer : IPermissionPolicyComposer
     {
         private readonly IApplicationContext applicationContext;
-        private readonly IRoleLookup roleLookup;
+        private readonly IResourceLookup<Role> roleLookup;
         private readonly IPermissionLookup permissionLookup;
         private readonly IPermissionSectionLookup permissionSectionLookup;
 
-        public PermissionPolicyResolver(IApplicationContext applicationContext, IRoleLookup roleLookup, IPermissionLookup permissionLookup, IPermissionSectionLookup permissionSectionLookup)
+        public PermissionPolicyComposer(IApplicationContext applicationContext, IResourceLookup<Role> roleLookup, IPermissionLookup permissionLookup, IPermissionSectionLookup permissionSectionLookup)
         {
             this.applicationContext = applicationContext;
             this.roleLookup = roleLookup;
@@ -27,7 +28,7 @@ namespace Reporter.Service.Security
             this.permissionSectionLookup = permissionSectionLookup;
         }
 
-        public async Task<IEnumerable<PermissionPolicy>> ResolveAsync<TCommand>(TCommand command) where TCommand : IAuthorizationCommand
+        public async Task<IEnumerable<PermissionPolicy>> ComposeAsync(IAuthorizationCommand command)
         {
             List<PermissionPolicy> permissionPolicies = new List<PermissionPolicy>();
 
@@ -40,7 +41,7 @@ namespace Reporter.Service.Security
             return permissionPolicies;
         }
 
-        private async Task<PermissionPolicy> GetUserPermissionPolicyAsync<TCommand>(TCommand command) where TCommand : IAuthorizationCommand
+        private async Task<PermissionPolicy> GetUserPermissionPolicyAsync(IAuthorizationCommand command)
         {
             return new PermissionPolicy()
             {
@@ -50,7 +51,7 @@ namespace Reporter.Service.Security
             };
         }
 
-        private async Task<IEnumerable<PermissionPolicy>> GetRolePermissionPoliciesAsync<TCommand>(TCommand command) where TCommand : IAuthorizationCommand
+        private async Task<IEnumerable<PermissionPolicy>> GetRolePermissionPoliciesAsync(IAuthorizationCommand command)
         {
             List<PermissionPolicy> permissionPolicies = new List<PermissionPolicy>();
             foreach (var role in this.applicationContext.UserInfo.Roles)

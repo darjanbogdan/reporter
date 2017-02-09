@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace Reporter.Service.Security.Contracts
 {
-    public interface IPermissionPolicyResolver
+    public interface IPermissionPolicyComposer
     {
-        Task<IEnumerable<PermissionPolicy>> ResolveAsync<TCommand>(TCommand command) where TCommand : IAuthorizationCommand;
+        Task<IEnumerable<PermissionPolicy>> ComposeAsync(IAuthorizationCommand command);
     }
 }

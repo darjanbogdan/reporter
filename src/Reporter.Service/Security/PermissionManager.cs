@@ -11,18 +11,17 @@ namespace Reporter.Service.Security
 {
     public class PermissionManager<TCommand> : IPermissionManager<TCommand> where TCommand : IAuthorizationCommand
     {
-        
-        private readonly IPermissionPolicyResolver permissionPolicyResolver;
+        private readonly IPermissionPolicyComposer permissionPolicyComposer;
 
-        public PermissionManager(IPermissionPolicyResolver permissionPolicyResolver)
+        public PermissionManager(IPermissionPolicyComposer permissionPolicyComposer)
         {
-            this.permissionPolicyResolver = permissionPolicyResolver;
+            this.permissionPolicyComposer = permissionPolicyComposer;
         }
 
         public async Task EvaluateAsync(TCommand command)
         {
             //TODO: think about composed permision policy: permissionid - permissionsectionid - userid - roleids
-            var permissionPolicies = await this.permissionPolicyResolver.ResolveAsync(command);
+            var permissionPolicies = await this.permissionPolicyComposer.ComposeAsync(command);
 
             //TODO: check in repository
         }

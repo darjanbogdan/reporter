@@ -1,4 +1,6 @@
-﻿using Reporter.Core.Command.Validation;
+﻿using Reporter.Core.Command.Authorization;
+using Reporter.Core.Command.Validation;
+using Reporter.Service.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Reporter.Service.Membership.Registration
 {
-    public class RegisterUserCommand : IValidationCommand
+    public partial class RegisterUserCommand : IValidationCommand
     {
         public string UserName { get; set; }
 
@@ -17,7 +19,7 @@ namespace Reporter.Service.Membership.Registration
 
         public string Email { get; set; }
 
-        public string FirstName { get; set; }
+        public string FirstName { get; set; }  
 
         public string LastName { get; set; }
     }

@@ -1,5 +1,6 @@
 ﻿using Reporter.Model;
 using Reporter.Repository.Membership.Contracts;
+using Reporter.Service.Infrastructure.Lookups;
 using System;
 using System.Collections.Generic;
 using System.Linq;

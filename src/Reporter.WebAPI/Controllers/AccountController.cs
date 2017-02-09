@@ -43,6 +43,9 @@ namespace Reporter.WebAPI.Controllers
         public async Task<HttpResponseMessage> TestAsync()
         {
             var ctx = this.owinContextProvider.CurrentContext;
+
+            await this.registerUserCommandHandler.ExecuteAsync(null);
+
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
