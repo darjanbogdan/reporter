@@ -40,10 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authorization\IAuthorize.cs" />
     <Compile Include="Command\Authorization\AuthenticationCommandHandlerDecorator.cs" />
     <Compile Include="Command\Authorization\AuthorizationCommandHandlerDecorator.cs" />
-    <Compile Include="Command\Authorization\IAuthorizationCommand.cs" />
-    <Compile Include="Command\Authorization\IPermissionManager.cs" />
+    <Compile Include="Command\Authorization\IAuthorizationEvaluator.cs" />
     <Compile Include="Command\ICommandHandler.cs" />
     <Compile Include="Context\IApplicationContext.cs" />
     <Compile Include="Context\IUserInfo.cs" />
@@ -51,11 +51,8 @@
     <Compile Include="Query\IQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Command\Validation\ICommandValidator.cs" />
-    <Compile Include="Command\Validation\IValidationCommand.cs" />
-    <Compile Include="Query\Validation\IQueryValidator.cs" />
-    <Compile Include="Query\Validation\IValidationQuery.cs" />
     <Compile Include="Command\Validation\ValidationCommandHandlerDecorator.cs" />
-    <Compile Include="Query\Validation\ValidationQueryHandlerDecorator.cs" />
+    <Compile Include="Validation\IValidate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mediator\" />

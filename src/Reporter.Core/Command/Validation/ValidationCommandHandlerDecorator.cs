@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reporter.Core.Validation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Reporter.Core.Command.Validation
 {
-    public class ValidationCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand> where TCommand : IValidationCommand
+    public class ValidationCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand> where TCommand : IValidate
     {
         private readonly ICommandValidator<TCommand> validator;
         private readonly ICommandHandler<TCommand> commandHandler; //decoratee

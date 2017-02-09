@@ -10,6 +10,7 @@ using Reporter.Service.Security.Lookups.Contracts;
 using Reporter.Core.Command.Authorization;
 using Reporter.Core.Context;
 using Reporter.Service.Infrastructure.Lookups;
+using Reporter.Core.Authorization;
 
 namespace Reporter.Service.Security
 {
@@ -28,30 +29,30 @@ namespace Reporter.Service.Security
             this.permissionSectionLookup = permissionSectionLookup;
         }
 
-        public async Task<IEnumerable<PermissionPolicy>> ComposeAsync(IAuthorizationCommand command)
+        public async Task<IEnumerable<PermissionPolicy>> ComposeAsync(IAuthorize commandToAuthorize)
         {
             List<PermissionPolicy> permissionPolicies = new List<PermissionPolicy>();
 
-            var userPermissionPolicy = await GetUserPermissionPolicyAsync(command);
+            var userPermissionPolicy = await GetUserPermissionPolicyAsync(commandToAuthorize);
             permissionPolicies.Add(userPermissionPolicy);
 
-            var rolePermissionPolicies = await GetRolePermissionPoliciesAsync(command);
+            var rolePermissionPolicies = await GetRolePermissionPoliciesAsync(commandToAuthorize);
             permissionPolicies.AddRange(rolePermissionPolicies);
 
             return permissionPolicies;
         }
 
-        private async Task<PermissionPolicy> GetUserPermissionPolicyAsync(IAuthorizationCommand command)
+        private async Task<PermissionPolicy> GetUserPermissionPolicyAsync(IAuthorize commandToAuthorize)
         {
             return new PermissionPolicy()
             {
                 UserId = this.applicationContext.UserInfo.UserId,
-                PermissionId = (await this.permissionLookup.GetAsync(command.Permission)).Id,
-                PermissionSectionId = (await this.permissionSectionLookup.GetAsync(command.PermissionSection)).Id
+                PermissionId = (await this.permissionLookup.GetAsync(commandToAuthorize.Permission)).Id,
+                PermissionSectionId = (await this.permissionSectionLookup.GetAsync(commandToAuthorize.PermissionSection)).Id
             };
         }
 
-        private async Task<IEnumerable<PermissionPolicy>> GetRolePermissionPoliciesAsync(IAuthorizationCommand command)
+        private async Task<IEnumerable<PermissionPolicy>> GetRolePermissionPoliciesAsync(IAuthorize commandToAuthorize)
         {
             List<PermissionPolicy> permissionPolicies = new List<PermissionPolicy>();
             foreach (var role in this.applicationContext.UserInfo.Roles)
@@ -59,8 +60,8 @@ namespace Reporter.Service.Security
                 permissionPolicies.Add(new PermissionPolicy()
                 {
                     RoleId = (await this.roleLookup.GetAsync(role)).Id,
-                    PermissionId = (await this.permissionLookup.GetAsync(command.Permission)).Id,
-                    PermissionSectionId = (await this.permissionSectionLookup.GetAsync(command.PermissionSection)).Id
+                    PermissionId = (await this.permissionLookup.GetAsync(commandToAuthorize.Permission)).Id,
+                    PermissionSectionId = (await this.permissionSectionLookup.GetAsync(commandToAuthorize.PermissionSection)).Id
                 });
             }
             return permissionPolicies;

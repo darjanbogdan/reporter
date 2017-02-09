@@ -13,6 +13,6 @@ namespace Reporter.Core.Command
         /// </summary>
         /// <param name="command">Command</param>
         /// <returns></returns>
-        Task ExecuteAsync(TCommand command);
+        Task ExecuteAsync(TCommand command); 
     }
 }

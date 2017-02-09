@@ -81,7 +81,7 @@
     <Compile Include="Security\Lookups\Contracts\IPermissionSectionLookup.cs" />
     <Compile Include="Security\Lookups\PermissionSectionLookup.cs" />
     <Compile Include="Security\Lookups\PermissionLookup.cs" />
-    <Compile Include="Security\PermissionManager.cs" />
+    <Compile Include="Security\AuthorizationEvaluator.cs" />
     <Compile Include="Security\PermissionPolicyComposer.cs" />
   </ItemGroup>
   <ItemGroup>

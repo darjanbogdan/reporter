@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reporter.Core.Authorization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Reporter.Core.Command.Authorization
 {
-    public interface IPermissionManager<TCommand> where TCommand : IAuthorizationCommand
+    public interface IAuthorizationEvaluator
     {
-        Task EvaluateAsync(TCommand command);
+        Task EvaluateAsync(IAuthorize commandToAuthorize);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Reporter.Core.Query;
+using Reporter.Core.Validation;
 using Reporter.Model;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using Reporter.Core.Command.Authorization;
+﻿using Reporter.Core.Authorization;
 using Reporter.Service.Security;
 using System;
 using System.Collections.Generic;
@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Reporter.Service.Membership.Registration
 {
-    public partial class RegisterUserCommand : IAuthorizationCommand
+    public partial class RegisterUserCommand : IAuthorize
     {
-        string IAuthorizationCommand.PermissionSection { get { return PermissionSectionMap.Membership; } }
+        string IAuthorize.PermissionSection { get { return PermissionSectionMap.Membership; } }
 
-        string IAuthorizationCommand.Permission { get { return PermissionMap.CreateAbrv; } }
+        string IAuthorize.Permission { get { return PermissionMap.CreateAbrv; } }
 
-        Guid? IAuthorizationCommand.OwnerId { get { return null;  /*Better example this.UserId from command*/ } }
+        Guid? IAuthorize.OwnerId { get { return null;  /*Better example this.UserId from command*/ } }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Core.Command.Authorization
+namespace Reporter.Core.Authorization
 {
-    public interface IAuthorizationCommand
+    public interface IAuthorize
     {
         string PermissionSection { get; }
 
