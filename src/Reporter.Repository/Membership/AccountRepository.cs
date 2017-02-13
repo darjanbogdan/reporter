@@ -38,13 +38,14 @@ namespace Reporter.Repository.Membership
 
         public async Task RegisterAsync(Account account, string password)
         {
-            var appUser = this.mapper.Map<ApplicationUser>(account); //TODO: Check this
+            var appUser = this.mapper.Map<ApplicationUser>(account);
 
             var result = await this.userManager.CreateAsync(appUser, password);
             if (!result.Succeeded)
             {
                 throw new ArgumentException(String.Join(joinDelimiter, result.Errors));
             }
+            //TODO: Add claims to database
         }
 
         public async Task InsertUserRolesAsync(Guid userId, IEnumerable<Role> roles)
@@ -68,7 +69,7 @@ namespace Reporter.Repository.Membership
         public Task<ClaimsIdentity> CreateIdentityAsync(Account account, string authenticationType)
         {
             var appUser = this.mapper.Map<ApplicationUser>(account);
-
+            //TODO: Fetch claims from database (?)
             return this.userManager.CreateIdentityAsync(appUser, authenticationType);
         }
     }

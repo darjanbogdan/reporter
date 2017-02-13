@@ -1,5 +1,7 @@
 ﻿using Reporter.Repository.Membership;
 using Reporter.Repository.Membership.Contracts;
+using Reporter.Repository.Security;
+using Reporter.Repository.Security.Contracts;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 using System;
@@ -16,6 +18,10 @@ namespace Reporter.Repository
         {
             container.Register<IAccountRepository, AccountRepository>();
             container.Register<IRoleRepository, RoleRepository>();
+
+            container.Register<IPermissionRepository, PermissionRepository>();
+            container.Register<IPermissionPolicyRepository, PermissionPolicyRepository>();
+            container.Register<IPermissionSectionRepository, PermissionSectionRepository>();
         }
     }
 }

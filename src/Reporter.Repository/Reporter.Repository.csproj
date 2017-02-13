@@ -79,6 +79,9 @@
     <Compile Include="Security\Contracts\IPermissionPolicyRepository.cs" />
     <Compile Include="Security\Contracts\IPermissionRepository.cs" />
     <Compile Include="Security\Contracts\IPermissionSectionRepository.cs" />
+    <Compile Include="Security\PermissionPolicyRepository.cs" />
+    <Compile Include="Security\PermissionRepository.cs" />
+    <Compile Include="Security\PermissionSectionRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

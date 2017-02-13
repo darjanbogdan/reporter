@@ -9,18 +9,18 @@ namespace Reporter.Core.Command.Authorization
 {
     public class AuthenticationCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand>
     {
-        private readonly IApplicationContext context;
+        private readonly IApplicationContext applicationContext;
         private readonly ICommandHandler<TCommand> commandHandler;
 
-        public AuthenticationCommandHandlerDecorator(IApplicationContext context, ICommandHandler<TCommand> commandHandler)
+        public AuthenticationCommandHandlerDecorator(IApplicationContext applicationContext, ICommandHandler<TCommand> commandHandler)
         {
-            this.context = context;
+            this.applicationContext = applicationContext;
             this.commandHandler = commandHandler;
         }
 
         public Task ExecuteAsync(TCommand command)
         {
-            if (!this.context.UserInfo.IsAuthenticated)
+            if (!this.applicationContext.UserInfo.IsAuthenticated)
             {
                 throw new UnauthorizedAccessException();
             }

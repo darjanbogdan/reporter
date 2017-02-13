@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Reporter.Core.Command;
+using Reporter.Core.Context;
 using Reporter.Service.Membership.Registration;
 using Reporter.WebAPI.Infrastructure.Owin.Providers;
 using System;
@@ -18,12 +19,10 @@ namespace Reporter.WebAPI.Controllers
     {
         private readonly ICommandHandler<RegisterUserCommand> registerUserCommandHandler;
         private readonly IMapper mapper;
-        private readonly IOwinContextProvider owinContextProvider;
 
-        public AccountController(ICommandHandler<RegisterUserCommand> registerUserCommandHandler, IOwinContextProvider owinContextProvider, IMapper mapper)
+        public AccountController(ICommandHandler<RegisterUserCommand> registerUserCommandHandler, IMapper mapper)
         {
             this.registerUserCommandHandler = registerUserCommandHandler;
-            this.owinContextProvider = owinContextProvider;
             this.mapper = mapper;
         }
 
@@ -36,17 +35,6 @@ namespace Reporter.WebAPI.Controllers
             await this.registerUserCommandHandler.ExecuteAsync(command);
 
             return Request.CreateResponse(HttpStatusCode.Created);
-        }
-
-        [Route("test")]
-        [HttpGet]
-        public async Task<HttpResponseMessage> TestAsync()
-        {
-            var ctx = this.owinContextProvider.CurrentContext;
-
-            await this.registerUserCommandHandler.ExecuteAsync(null);
-
-            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         //TODO: Implement account activation (opt-in)

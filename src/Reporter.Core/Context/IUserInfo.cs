@@ -15,7 +15,5 @@ namespace Reporter.Core.Context
         Guid UserId { get; }
 
         IEnumerable<string> Roles { get; }
-
-        string Email { get; }
     }
 }
