@@ -34,6 +34,9 @@ namespace Reporter.Repository.Infrastructure.Mapper
             mapAccountToApplicationUser.ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
             mapAccountToApplicationUser.ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
             mapAccountToApplicationUser.ForMember(dest => dest.Roles, opt => opt.Ignore());
+
+            var mapPermissionToPermissionEntity = this.CreateMap<DAL.Models.Permission, Permission>();
+            var mapPermissionEntityToPermission = this.CreateMap<Permission, DAL.Models.Permission>();
         }
     }
 }

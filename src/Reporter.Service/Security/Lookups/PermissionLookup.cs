@@ -19,9 +19,9 @@ namespace Reporter.Service.Security.Lookups
         }
 
         //TODO: Cache
-        public Task<IEnumerable<Permission>> GetAllAsync()
+        public async Task<IEnumerable<Permission>> GetAllAsync()
         {
-            return this.permissionRepository.FindAsync();
+            return await this.permissionRepository.GetAllAsync();
         }
 
         public async Task<Permission> GetAsync(string abrv)

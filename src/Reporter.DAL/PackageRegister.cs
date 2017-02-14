@@ -27,6 +27,8 @@ namespace Reporter.DAL
             container.Register<IRoleStore<ApplicationRole, Guid>, ApplicationRoleStore>(Lifestyle.Scoped);
 
             container.Register<UserManager<ApplicationUser, Guid>, ApplicationUserManager>(Lifestyle.Scoped);
+
+            container.Register(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         }
     }
 }

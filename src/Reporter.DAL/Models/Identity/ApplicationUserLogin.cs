@@ -9,5 +9,6 @@ namespace Reporter.DAL.Models.Identity
 {
     public class ApplicationUserLogin : IdentityUserLogin<Guid>
     {
+
     }
 }

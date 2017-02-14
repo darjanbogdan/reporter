@@ -2,6 +2,7 @@
 using Reporter.Core.Command;
 using Reporter.Model;
 using Reporter.Repository.Membership.Contracts;
+using Reporter.Repository.Security.Contracts;
 using Reporter.Service.Membership.Lookups;
 using System;
 using System.Collections.Generic;

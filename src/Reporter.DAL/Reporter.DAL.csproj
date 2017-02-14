@@ -73,6 +73,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\ApplicationDbContext.cs" />
+    <Compile Include="GenericRepository.cs" />
+    <Compile Include="IGenericRepository.cs" />
     <Compile Include="Maps\ClientMap.cs" />
     <Compile Include="Maps\ClientPermissionPolicyMap.cs" />
     <Compile Include="Maps\ClientProjectMap.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\ClientPermissionPolicy.cs" />
     <Compile Include="Models\ClientProject.cs" />
+    <Compile Include="Models\Contracts\IDbModel.cs" />
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\PermissionPolicy.cs" />
     <Compile Include="Models\PermissionSection.cs" />

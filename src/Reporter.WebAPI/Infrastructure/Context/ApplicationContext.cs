@@ -36,8 +36,6 @@ namespace Reporter.WebAPI.Infrastructure.Context
 
         private class ContextUserInfo : IUserInfo
         {
-            public string Email { get; set; }
-
             public bool IsAuthenticated { get; set; }
 
             public IEnumerable<string> Roles { get; set; }

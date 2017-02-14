@@ -9,6 +9,16 @@ namespace Reporter.Repository.Security.Contracts
 {
     public interface IPermissionSectionRepository
     {
+        Task DeleteAsync(Guid entityId);
+
+        Task<IList<PermissionSection>> GetAllAsync();
+
+        Task<PermissionSection> GetAsync(Guid entityId);
+
         Task<IEnumerable<PermissionSection>> FindAsync();
+
+        Task InsertAsync(PermissionSection entity);
+
+        Task UpdateAsync(PermissionSection entity);
     }
 }

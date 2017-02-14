@@ -1,3 +1,4 @@
+using Reporter.DAL.Models.Contracts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +7,7 @@ using System.Data.Entity.Spatial;
 
 namespace Reporter.DAL.Models
 {
-    public partial class Permission
+    public partial class Permission : IDbModel
     {
         public Guid Id { get; set; }
 

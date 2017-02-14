@@ -9,12 +9,12 @@ namespace Reporter.Core.Query
 {
     public interface IQuery<TResult>
     {
-        IQueryFilter Filter { get; set; }
+        //IQueryFilter Filter { get; set; }
 
-        IQuerySorter Sorter { get; set; }
+        //IQuerySorter Sorter { get; set; }
 
-        IQueryPager Pager { get; set; }
+        //IQueryPager Pager { get; set; }
 
-        IQueryOptions Options { get; set;}
+        //IQueryOptions Options { get; set;}
     }
 }

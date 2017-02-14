@@ -24,21 +24,6 @@ namespace Reporter.Service
             var serviceAsm = this.GetType().Assembly;
 
             RegisterLookups(container, serviceAsm);
-            RegisterCommandHandlerPipeline(container, serviceAsm);
-            RegisterQueryHandlerPipeline(container, serviceAsm);
-
-            var asms = AppDomain.CurrentDomain.GetAssemblies().Where(asm => asm.GetName().Name.StartsWith("Reporter"));
-        }
-
-        private void RegisterCommandHandlerPipeline(Container container, Assembly assembly)
-        {
-            var asmList = new[] { assembly };
-
-            container.Register(typeof(ICommandHandler<>), asmList);
-            container.RegisterDecorator(typeof(ICommandHandler<>), typeof(ValidationCommandHandlerDecorator<>));
-            container.RegisterDecorator(typeof(ICommandHandler<>), typeof(AuthenticationCommandHandlerDecorator<>));
-
-            container.Register(typeof(ICommandValidator<>), asmList);
         }
 
         private void RegisterLookups(Container container, Assembly assembly)
@@ -59,13 +44,6 @@ namespace Reporter.Service
                     container.Register(lookupInterface, lookupType);
                 }
             }
-        }
-
-        private void RegisterQueryHandlerPipeline(Container container, Assembly assembly)
-        {
-            var asmList = new[] { assembly };
-
-            container.Register(typeof(IQueryHandler<,>), asmList);
         }
     }
 }

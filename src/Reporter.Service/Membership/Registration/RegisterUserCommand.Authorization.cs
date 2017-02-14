@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Reporter.Service.Membership.Registration
 {
-    public partial class RegisterUserCommand : IAuthorize
-    {
-        string IAuthorize.PermissionSection { get { return PermissionSectionMap.Membership; } }
+    //public partial class RegisterUserCommand : IAuthorize
+    //{
+    //    string IAuthorize.PermissionSection { get { return PermissionSectionMap.Membership; } }
 
-        string IAuthorize.Permission { get { return PermissionMap.CreateAbrv; } }
+    //    string IAuthorize.Permission { get { return PermissionMap.CreateAbrv; } }
 
-        Guid? IAuthorize.OwnerId { get { return null;  /*Better example this.UserId from command*/ } }
-    }
+    //    Guid? IAuthorize.OwnerId { get { return null;  /*Better example this.UserId from command*/ } }
+    //}
 }

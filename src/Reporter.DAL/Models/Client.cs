@@ -1,3 +1,4 @@
+using Reporter.DAL.Models.Contracts;
 using Reporter.DAL.Models.Identity;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Data.Entity.Spatial;
 
 namespace Reporter.DAL.Models
 {
-    public partial class Client
+    public partial class Client : IDbModel
     {
         public Client()
         {
