@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Core.Query.Arguments
+namespace Reporter.Core.Validation
 {
-    public interface IQueryFilter
+    public interface IValidator<T> where T : IValidate
     {
+        Task ValidateAsync(T parameter);
     }
 }

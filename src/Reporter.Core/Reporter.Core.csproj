@@ -56,16 +56,16 @@
     <Compile Include="Context\IApplicationContext.cs" />
     <Compile Include="Context\IUserInfo.cs" />
     <Compile Include="PackageRegister.cs" />
-    <Compile Include="Query\Arguments\IQueryOptions.cs" />
+    <Compile Include="Query\Authorization\AuthenticationQueryHandlerDecorator.cs" />
+    <Compile Include="Query\Authorization\AuthorizationQueryHandlerDecorator.cs" />
     <Compile Include="Query\IQuery.cs" />
-    <Compile Include="Query\Arguments\IQueryFilter.cs" />
     <Compile Include="Query\IQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Command\Validation\ICommandValidator.cs" />
     <Compile Include="Command\Validation\ValidationCommandHandlerDecorator.cs" />
-    <Compile Include="Query\Arguments\IQueryPager.cs" />
-    <Compile Include="Query\Arguments\IQuerySorter.cs" />
+    <Compile Include="Query\Validation\ValidationQueryHandlerDecorator.cs" />
     <Compile Include="Validation\IValidate.cs" />
+    <Compile Include="Validation\IValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mediator\" />

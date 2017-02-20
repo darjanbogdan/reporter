@@ -7,12 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Service.Membership.Login
+namespace Reporter.Service.ClientManagement.GetClient
 {
-    public class GetUserIdentityQuery : IQuery<GetUserIdentityResult>
+    public partial class GetClientQuery : IQuery<Client>, IValidate
     {
-        public string UserName { get; set; }
-
-        public string Password { get; set; }
+        public Guid ClientId { get; set; }
     }
 }

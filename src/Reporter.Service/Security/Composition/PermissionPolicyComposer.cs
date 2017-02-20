@@ -1,5 +1,4 @@
-﻿using Reporter.Service.Security.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +10,9 @@ using Reporter.Core.Command.Authorization;
 using Reporter.Core.Context;
 using Reporter.Service.Infrastructure.Lookups;
 using Reporter.Core.Authorization;
+using Reporter.Service.Security.Composition.Contracts;
 
-namespace Reporter.Service.Security
+namespace Reporter.Service.Security.Compositon
 {
     public class PermissionPolicyComposer : IPermissionPolicyComposer
     {
@@ -44,6 +44,8 @@ namespace Reporter.Service.Security
 
         private async Task<PermissionPolicy> GetUserPermissionPolicyAsync(IAuthorize commandToAuthorize)
         {
+            //TODO: Exception handling?
+
             return new PermissionPolicy()
             {
                 UserId = this.applicationContext.UserInfo.UserId,
@@ -54,6 +56,8 @@ namespace Reporter.Service.Security
 
         private async Task<IEnumerable<PermissionPolicy>> GetRolePermissionPoliciesAsync(IAuthorize commandToAuthorize)
         {
+            //TODO: Exception handling
+
             List<PermissionPolicy> permissionPolicies = new List<PermissionPolicy>();
             foreach (var role in this.applicationContext.UserInfo.Roles)
             {

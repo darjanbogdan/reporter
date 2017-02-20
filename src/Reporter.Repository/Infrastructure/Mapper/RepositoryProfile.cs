@@ -37,6 +37,14 @@ namespace Reporter.Repository.Infrastructure.Mapper
 
             var mapPermissionToPermissionEntity = this.CreateMap<DAL.Models.Permission, Permission>();
             var mapPermissionEntityToPermission = this.CreateMap<Permission, DAL.Models.Permission>();
+            var mapPermissionSectionToPermissionSectionEntity = this.CreateMap<DAL.Models.PermissionSection, PermissionSection>();
+            var mapPermissionSectionEntityToPermissionSection = this.CreateMap<PermissionSection, DAL.Models.PermissionSection>();
+            var mapPermissionPolicyToPermissionPolicyEntity = this.CreateMap<DAL.Models.PermissionPolicy, PermissionPolicy>();
+            var mapPermissionPolicyEntityToPermissionPolicy = this.CreateMap<PermissionPolicy, DAL.Models.PermissionPolicy>();
+
+
+            var mapClientToClientEntity = this.CreateMap<DAL.Models.Client, Client>();
+            var mapClientEntityToClient = this.CreateMap<Client, DAL.Models.Client>();
         }
     }
 }

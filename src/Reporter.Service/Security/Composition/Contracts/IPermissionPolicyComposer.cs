@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Service.Security.Contracts
+namespace Reporter.Service.Security.Composition.Contracts
 {
     public interface IPermissionPolicyComposer
     {

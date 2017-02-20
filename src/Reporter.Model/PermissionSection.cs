@@ -2,7 +2,7 @@ using System;
 
 namespace Reporter.Model
 {
-    public partial class PermissionSection
+    public class PermissionSection
     {
         public Guid Id { get; set; }
 

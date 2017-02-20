@@ -16,9 +16,9 @@ namespace Reporter.DAL.Models
 
         public Guid PermissionSectionId { get; set; }
 
-        public Guid RoleId { get; set; }
+        public Guid? RoleId { get; set; }
 
-        public Guid UserId { get; set; }
+        public Guid? UserId { get; set; }
 
         public DateTime DateCreated { get; set; }
 

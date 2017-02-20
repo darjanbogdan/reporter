@@ -29,9 +29,34 @@ namespace Reporter.Repository.Security
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<PermissionPolicy>> FindAsync()
+        public async Task<IEnumerable<PermissionPolicy>> FindAsync(PermissionPolicyFilter filter)
         {
-            throw new NotImplementedException();
+            if (filter == null) throw new ArgumentNullException(nameof(filter));
+
+            var query = this.context.Set<DAL.Models.PermissionPolicy>().AsQueryable();
+
+            //TODO: Find a better way to handle slightly complex queries...
+            //query = query.Where(pp => pp.PermissionId == filter.PermissionId && pp.PermissionSectionId == filter.PermissionSectionId);
+
+            //if (filter.RoleIds?.Any() == true)
+            //{
+            //    query = query.Where(pp => pp.RoleId.HasValue && filter.RoleIds.Contains(pp.RoleId.Value));
+            //}
+
+            //if (filter.UserIds?.Any() == true)
+            //{
+            //    query = query.Where(pp => pp.UserId.HasValue && filter.UserIds.Contains(pp.UserId.Value));
+            //}
+
+            query = query.Where(pp => pp.PermissionId == filter.PermissionId && pp.PermissionSectionId == filter.PermissionSectionId
+                && (
+                    (pp.RoleId.HasValue && filter.RoleIds.Contains(pp.RoleId.Value))
+                    ||
+                    (pp.UserId.HasValue && filter.UserIds.Contains(pp.UserId.Value))
+                ));
+
+            var entities = await query.ToListAsync();
+            return this.mapper.Map<List<PermissionPolicy>>(entities);
         }
 
         public async Task<IList<PermissionPolicy>> GetAllAsync()
@@ -55,5 +80,16 @@ namespace Reporter.Repository.Security
         {
             throw new NotImplementedException();
         }
+    }
+
+    public class PermissionPolicyFilter
+    {
+        public Guid PermissionSectionId { get; set; }
+
+        public Guid PermissionId { get; set; }
+
+        public IEnumerable<Guid> RoleIds { get; set; }
+
+        public IEnumerable<Guid> UserIds { get; set; }
     }
 }

@@ -10,6 +10,9 @@ using Reporter.Core.Command.Validation;
 using Reporter.Core.Command.Authorization;
 using System.Reflection;
 using Reporter.Core.Query;
+using Reporter.Core.Validation;
+using Reporter.Core.Query.Validation;
+using Reporter.Core.Query.Authorization;
 
 namespace Reporter.Core
 {
@@ -27,8 +30,8 @@ namespace Reporter.Core
         {
             container.Register(typeof(ICommandHandler<>), assemblies);
             container.RegisterDecorator(typeof(ICommandHandler<>), typeof(ValidationCommandHandlerDecorator<>));
-            //container.RegisterDecorator(typeof(ICommandHandler<>), typeof(AuthorizationCommandHandlerDecorator<>));
-            //container.RegisterDecorator(typeof(ICommandHandler<>), typeof(AuthenticationCommandHandlerDecorator<>));
+            container.RegisterDecorator(typeof(ICommandHandler<>), typeof(AuthorizationCommandHandlerDecorator<>));
+            container.RegisterDecorator(typeof(ICommandHandler<>), typeof(AuthenticationCommandHandlerDecorator<>));
 
             container.Register(typeof(ICommandValidator<>), assemblies);
         }
@@ -36,6 +39,10 @@ namespace Reporter.Core
         private void RegisterQueryHandlerPipeline(Container container, Assembly[] assemblies)
         {
             container.Register(typeof(IQueryHandler<,>), assemblies);
+            container.RegisterDecorator(typeof(IQueryHandler<,>), typeof(ValidationQueryHandlerDecorator<,>));
+            container.RegisterDecorator(typeof(IQueryHandler<,>), typeof(AuthorizationQueryHandlerDecorator<,>));
+            container.RegisterDecorator(typeof(IQueryHandler<,>), typeof(AuthenticationQueryHandlerDecorator<,>));
+            container.Register(typeof(IValidator<>), assemblies);
         }
     }
 }

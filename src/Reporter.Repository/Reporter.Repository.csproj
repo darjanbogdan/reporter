@@ -69,6 +69,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clients\ClientRepository.cs" />
+    <Compile Include="Clients\Contracts\IClientRepository.cs" />
     <Compile Include="Membership\AccountRepository.cs" />
     <Compile Include="Membership\Contracts\IAccountRepository.cs" />
     <Compile Include="Infrastructure\Mapper\RepositoryProfile.cs" />

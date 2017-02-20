@@ -41,6 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="ClientPermissionPolicy.cs" />
+    <Compile Include="ClientProject.cs" />
     <Compile Include="Permission.cs" />
     <Compile Include="PermissionPolicy.cs" />
     <Compile Include="PermissionSection.cs" />

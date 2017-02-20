@@ -21,12 +21,12 @@ namespace Reporter.Service.Security
 
     public static class PermissionSectionMap
     {
-        public const string Membership = "Membership"; //TODO: Maybe split into Role-User
+        public const string GeneralSection = "general-section";
 
-        public const string Client = "Client";
+        public const string ClientSection = "client-section";
 
-        public const string Project = "Project";
+        public const string ProjectSection = "project-section";
 
-        public const string Report = "Report";
+        public const string ReportSection = "report-section";
     }
 }

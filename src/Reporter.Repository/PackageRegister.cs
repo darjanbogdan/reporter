@@ -1,4 +1,6 @@
-﻿using Reporter.Repository.Membership;
+﻿using Reporter.Repository.Clients;
+using Reporter.Repository.Clients.Contracts;
+using Reporter.Repository.Membership;
 using Reporter.Repository.Membership.Contracts;
 using Reporter.Repository.Security;
 using Reporter.Repository.Security.Contracts;
@@ -22,6 +24,8 @@ namespace Reporter.Repository
             container.Register<IPermissionRepository, PermissionRepository>();
             container.Register<IPermissionPolicyRepository, PermissionPolicyRepository>();
             container.Register<IPermissionSectionRepository, PermissionSectionRepository>();
+
+            container.Register<IClientRepository, ClientRepository>();
         }
     }
 }

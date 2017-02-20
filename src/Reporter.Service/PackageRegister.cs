@@ -5,6 +5,9 @@ using Reporter.Core.Context;
 using Reporter.Core.Query;
 using Reporter.Service.Infrastructure.Lookups;
 using Reporter.Service.Membership.Lookups;
+using Reporter.Service.Security;
+using Reporter.Service.Security.Composition.Contracts;
+using Reporter.Service.Security.Compositon;
 using SimpleInjector;
 using SimpleInjector.Advanced;
 using SimpleInjector.Packaging;
@@ -24,6 +27,9 @@ namespace Reporter.Service
             var serviceAsm = this.GetType().Assembly;
 
             RegisterLookups(container, serviceAsm);
+
+            container.Register<IAuthorizationEvaluator, AuthorizationEvaluator>();
+            container.Register<IPermissionPolicyComposer, PermissionPolicyComposer>();
         }
 
         private void RegisterLookups(Container container, Assembly assembly)

@@ -15,7 +15,7 @@ namespace Reporter.Repository.Security.Contracts
 
         Task<PermissionPolicy> GetAsync(Guid entityId);
 
-        Task<IEnumerable<PermissionPolicy>> FindAsync();
+        Task<IEnumerable<PermissionPolicy>> FindAsync(PermissionPolicyFilter filter);
 
         Task InsertAsync(PermissionPolicy entity);
 
