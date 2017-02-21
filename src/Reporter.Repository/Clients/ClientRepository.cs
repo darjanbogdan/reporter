@@ -54,7 +54,8 @@ namespace Reporter.Repository.Clients
 
         public Task UpdateAsync(Client client)
         {
-            throw new NotImplementedException();
+            var entity = this.mapper.Map<DAL.Models.Client>(client);
+            return this.genericRepository.UpdateAsync(entity);
         }
     }
 }

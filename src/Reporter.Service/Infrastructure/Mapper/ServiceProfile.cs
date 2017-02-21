@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Reporter.Model;
 using Reporter.Service.ClientManagement.CreateClient;
+using Reporter.Service.ClientManagement.UpdateClient;
 using Reporter.Service.Membership.Registration;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,9 @@ namespace Reporter.Service.Infrastructure.Mapper
 
             var mapClientFromCreateClientCommand = CreateMap<CreateClientCommand, Client>();
             mapClientFromCreateClientCommand.ForMember(dest => dest.ClientManagerId, opt => opt.MapFrom(src => src.ManagerId));
+
+            var mapClientFromUpdateClientCommand = CreateMap<UpdateClientCommand, Client>();
+            mapClientFromUpdateClientCommand.ForMember(dest => dest.ClientManagerId, opt => opt.MapFrom(src => src.ManagerId));
         }
     }
 }

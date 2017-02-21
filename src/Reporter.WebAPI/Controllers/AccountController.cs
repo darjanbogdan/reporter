@@ -28,7 +28,7 @@ namespace Reporter.WebAPI.Controllers
 
         [Route("register")]
         [HttpPost]
-        public async Task<HttpResponseMessage> RegisterAsync(RegisterUser registerUser)
+        public async Task<HttpResponseMessage> RegisterAsync(RegisterUserRest registerUser)
         {
             var command = this.mapper.Map<RegisterUserCommand>(registerUser);
 
@@ -41,7 +41,7 @@ namespace Reporter.WebAPI.Controllers
         //TODO: Implement change password and/or forgot password (opt-in)
         //TODO: Implement change email (opt-in) ?
 
-        public class RegisterUser
+        public class RegisterUserRest
         {
             public string UserName { get; set; }
 

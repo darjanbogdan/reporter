@@ -20,11 +20,11 @@ namespace Reporter.Service.ClientManagement.CreateClient
                 .NotEmpty().WithMessage("Value is required.");
         }
 
-        public Task ValidateAsync(CreateClientCommand command)
+        public Task ValidateAsync(CreateClientCommand parameter)
         {
-            if (command == null) throw new ValidatorException(nameof(command));
+            if (parameter == null) throw new ValidatorException(nameof(parameter));
 
-            var validationResult = this.Validate(command);
+            var validationResult = this.Validate(parameter);
             if (!validationResult.IsValid)
             {
                 throw new ValidatorException(validationResult.Errors);

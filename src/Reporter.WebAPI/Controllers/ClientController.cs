@@ -5,6 +5,7 @@ using Reporter.Core.Query;
 using Reporter.Model;
 using Reporter.Service.ClientManagement.CreateClient;
 using Reporter.Service.ClientManagement.GetClient;
+using Reporter.Service.ClientManagement.UpdateClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,17 +22,20 @@ namespace Reporter.WebAPI.Controllers
     {
         private readonly ICommandHandler<CreateClientCommand> createClientCommandHandler;
         private readonly IQueryHandler<GetClientQuery, Client> getClientQueryHandler;
+        private readonly ICommandHandler<UpdateClientCommand> updateClientCommandHandler;
         private readonly IApplicationContext applicationContext;
         private readonly IMapper mapper;
 
         public ClientController(
             ICommandHandler<CreateClientCommand> createClientCommandHandler, 
             IQueryHandler<GetClientQuery, Client> getClientQueryHandler,
+            ICommandHandler<UpdateClientCommand> updateClientCommandHandler,
             IApplicationContext applicationContext,
             IMapper mapper)
         {
             this.createClientCommandHandler = createClientCommandHandler;
             this.getClientQueryHandler = getClientQueryHandler;
+            this.updateClientCommandHandler = updateClientCommandHandler;
             this.applicationContext = applicationContext;
             this.mapper = mapper;
         }
@@ -59,6 +63,19 @@ namespace Reporter.WebAPI.Controllers
             var result = await this.getClientQueryHandler.RunAsync(query);
 
             return Request.CreateResponse(HttpStatusCode.OK, this.mapper.Map<ClientRest>(result));
+        }
+
+        [Route("{clientId}")]
+        [HttpPut]
+        public async Task<HttpResponseMessage> UpdateAsync(Guid clientId, ClientRest client)
+        {
+            var command = new UpdateClientCommand();
+            this.mapper.Map(client, command);
+            command.Id = clientId;
+
+            await this.updateClientCommandHandler.ExecuteAsync(command);
+
+            return Request.CreateResponse(HttpStatusCode.Created);
         }
 
         public class ClientRest

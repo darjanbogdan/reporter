@@ -37,18 +37,18 @@ namespace Reporter.Service.Membership.Registration
 
             RuleFor(registerUser => registerUser.ConfirmPassword)
                 .NotEmpty().WithMessage("Value is required.")
-                .Must((model, field) =>
+                .Must((command, field) =>
                 {
-                    return field == model.Password;
+                    return field == command.Password;
                 }).WithMessage("Confirm password isn't correct.");
                 
         }   
 
-        public Task ValidateAsync(RegisterUserCommand command)
+        public Task ValidateAsync(RegisterUserCommand parameter)
         {
-            if (command == null) throw new ValidatorException("command");
+            if (parameter == null) throw new ValidatorException(nameof(parameter));
 
-            var validationResult = this.Validate(command);
+            var validationResult = this.Validate(parameter);
             if (!validationResult.IsValid)
             {
                 throw new ValidatorException(validationResult.Errors);

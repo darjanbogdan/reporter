@@ -33,7 +33,7 @@ namespace Reporter.DAL
 
         public Task<TEntity> GetAsync(Guid entityId)
         {
-            return this.context.Set<TEntity>().SingleOrDefaultAsync(e => e.Id == entityId);
+            return this.context.Set<TEntity>().AsNoTracking().SingleOrDefaultAsync(e => e.Id == entityId);
         }
 
         public Task InsertAsync(TEntity entity)
@@ -44,9 +44,9 @@ namespace Reporter.DAL
 
         public Task UpdateAsync(TEntity entity)
         {
-            entity.DateUpdated = DateTime.UtcNow;
             this.context.Set<TEntity>().Attach(entity);
             this.context.Entry<TEntity>(entity).State = EntityState.Modified;
+            this.context.Entry<TEntity>(entity).Property(x => x.DateCreated).IsModified = false;
             return this.context.SaveChangesAsync();
         }
     }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Reporter.Model;
 using Reporter.Service.ClientManagement.CreateClient;
+using Reporter.Service.ClientManagement.UpdateClient;
 using Reporter.Service.Membership.Registration;
 using Reporter.WebAPI.Controllers;
 using System;
@@ -15,11 +16,14 @@ namespace Reporter.WebAPI.Infrastructure.Mapper
         public WebAPIProfile()
             : base(nameof(WebAPIProfile))
         {
-            var mapFromRegisterUser = CreateMap<AccountController.RegisterUser, RegisterUserCommand>();
+            var mapFromRegisterUserToRegisterUser = CreateMap<AccountController.RegisterUserRest, RegisterUserCommand>();
 
-            var mapFromClientRest = CreateMap<ClientController.ClientRest, CreateClientCommand>();
-            var mapFromClient = CreateMap<Client, ClientController.ClientRest>();
-            mapFromClient.ForMember(dest => dest.ManagerId, opt => opt.MapFrom(src => src.ClientManagerId));
+            var mapFromClientRestCreateClient = CreateMap<ClientController.ClientRest, CreateClientCommand>();
+            var mapFromClientRestToUpdateClient = CreateMap<ClientController.ClientRest, UpdateClientCommand>();
+            mapFromClientRestToUpdateClient.ForMember(dest => dest.Id, opt => opt.Ignore());
+
+            var mapFromClientToClientRest = CreateMap<Client, ClientController.ClientRest>();
+            mapFromClientToClientRest.ForMember(dest => dest.ManagerId, opt => opt.MapFrom(src => src.ClientManagerId));
         }
     }
 }

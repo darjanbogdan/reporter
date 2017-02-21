@@ -21,10 +21,10 @@ namespace Reporter.WebAPI.Controllers
 
         [Route("")]
         [HttpGet]
-        public async Task<HttpResponseMessage> TestAsync()
+        public Task<HttpResponseMessage> TestAsync()
         {
             var ctx = this.applicationContextFactory();
-            return Request.CreateResponse(HttpStatusCode.OK, ctx.UserInfo);
+            return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, ctx.UserInfo));
         }
     }
 }
