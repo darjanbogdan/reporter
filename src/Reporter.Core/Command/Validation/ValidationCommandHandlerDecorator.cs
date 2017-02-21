@@ -9,10 +9,10 @@ namespace Reporter.Core.Command.Validation
 {
     public class ValidationCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand> where TCommand : IValidate
     {
-        private readonly ICommandValidator<TCommand> validator;
+        private readonly IValidator<TCommand> validator;
         private readonly ICommandHandler<TCommand> commandHandler; //decoratee
 
-        public ValidationCommandHandlerDecorator(ICommandValidator<TCommand> validator, ICommandHandler<TCommand> commandHandler)
+        public ValidationCommandHandlerDecorator(IValidator<TCommand> validator, ICommandHandler<TCommand> commandHandler)
         {
             this.validator = validator;
             this.commandHandler = commandHandler;

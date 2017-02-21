@@ -1,5 +1,4 @@
-﻿using Reporter.Core.Authorization;
-using Reporter.Core.Command.Authorization;
+﻿using Reporter.Core.Auth;
 using Reporter.Core.Context;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Core.Query.Authorization
+namespace Reporter.Core.Query.Auth
 {
     public class AuthorizationQueryHandlerDecorator<TQuery, TResult> : IQueryHandler<TQuery, TResult> where TQuery : IQuery<TResult>, IAuthorize
     {

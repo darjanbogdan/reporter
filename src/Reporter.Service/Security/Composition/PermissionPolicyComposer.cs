@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 using Reporter.Model;
 using Reporter.Service.Membership.Lookups;
 using Reporter.Service.Security.Lookups.Contracts;
-using Reporter.Core.Command.Authorization;
 using Reporter.Core.Context;
 using Reporter.Service.Infrastructure.Lookups;
-using Reporter.Core.Authorization;
+using Reporter.Core.Auth;
 using Reporter.Service.Security.Composition.Contracts;
 
 namespace Reporter.Service.Security.Compositon

@@ -1,13 +1,14 @@
-﻿using Reporter.Core.Context;
+﻿using Reporter.Core.Auth;
+using Reporter.Core.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Core.Command.Authorization
+namespace Reporter.Core.Command.Auth
 {
-    public class AuthenticationCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand>
+    public class AuthenticationCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand> where TCommand : IAuthenticate
     {
         private readonly IApplicationContext applicationContext;
         private readonly ICommandHandler<TCommand> commandHandler;
@@ -22,7 +23,7 @@ namespace Reporter.Core.Command.Authorization
         {
             if (!this.applicationContext.UserInfo.IsAuthenticated)
             {
-                throw new UnauthorizedAccessException();
+                throw new UnauthorizedAccessException("authentication...");
             }
 
             return this.commandHandler.ExecuteAsync(command);

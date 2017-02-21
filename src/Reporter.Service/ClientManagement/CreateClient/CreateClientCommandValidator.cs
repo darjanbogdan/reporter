@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Reporter.Service.ClientManagement.CreateClient
 {
-    public class CreateClientCommandValidator : AbstractValidator<CreateClientCommand>, ICommandValidator<CreateClientCommand>
+    public class CreateClientCommandValidator : AbstractValidator<CreateClientCommand>, Core.Validation.IValidator<CreateClientCommand>
     {
         public CreateClientCommandValidator()
         {

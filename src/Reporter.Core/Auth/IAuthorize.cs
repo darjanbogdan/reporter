@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Core.Authorization
+namespace Reporter.Core.Auth
 {
     public interface IAuthorize
     {

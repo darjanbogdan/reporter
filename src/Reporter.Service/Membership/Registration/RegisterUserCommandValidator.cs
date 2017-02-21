@@ -12,7 +12,7 @@ using Reporter.Service.Infrastructure.Validator;
 
 namespace Reporter.Service.Membership.Registration
 {
-    public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>, ICommandValidator<RegisterUserCommand>
+    public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>, Core.Validation.IValidator<RegisterUserCommand>
     {
         public RegisterUserCommandValidator()
         {

@@ -1,4 +1,4 @@
-﻿using Reporter.Core.Authorization;
+﻿using Reporter.Core.Auth;
 using Reporter.Model;
 using Reporter.Service.Security;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Reporter.Service.ClientManagement.GetClient
 {
-    public partial class GetClientQuery : IAuthorize
+    public partial class GetClientQuery : IAuthenticate, IAuthorize
     {
         Guid? IAuthorize.OwnerId { get; } = null;
 

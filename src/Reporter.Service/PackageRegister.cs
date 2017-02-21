@@ -1,15 +1,9 @@
-﻿using Reporter.Core.Command;
-using Reporter.Core.Command.Authorization;
-using Reporter.Core.Command.Validation;
-using Reporter.Core.Context;
-using Reporter.Core.Query;
+﻿using Reporter.Core.Auth;
 using Reporter.Service.Infrastructure.Lookups;
-using Reporter.Service.Membership.Lookups;
 using Reporter.Service.Security;
 using Reporter.Service.Security.Composition.Contracts;
 using Reporter.Service.Security.Compositon;
 using SimpleInjector;
-using SimpleInjector.Advanced;
 using SimpleInjector.Packaging;
 using System;
 using System.Collections.Generic;

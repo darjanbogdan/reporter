@@ -1,13 +1,14 @@
-﻿using Reporter.Core.Context;
+﻿using Reporter.Core.Auth;
+using Reporter.Core.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reporter.Core.Query.Authorization
+namespace Reporter.Core.Query.Auth
 {
-    public class AuthenticationQueryHandlerDecorator<TQuery, TResult> : IQueryHandler<TQuery, TResult> where TQuery : IQuery<TResult>
+    public class AuthenticationQueryHandlerDecorator<TQuery, TResult> : IQueryHandler<TQuery, TResult> where TQuery : IQuery<TResult>, IAuthenticate
     {
         private readonly IApplicationContext applicationContext;
         private readonly IQueryHandler<TQuery, TResult> queryHandler;

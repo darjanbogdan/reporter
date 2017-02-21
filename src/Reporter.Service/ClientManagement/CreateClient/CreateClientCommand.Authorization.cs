@@ -1,4 +1,4 @@
-﻿using Reporter.Core.Authorization;
+﻿using Reporter.Core.Auth;
 using Reporter.Service.Security;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Reporter.Service.ClientManagement.CreateClient
 {
-    public partial class CreateClientCommand : IAuthorize
+    public partial class CreateClientCommand : IAuthenticate, IAuthorize
     {
         Guid? IAuthorize.OwnerId { get; } = null;
 

@@ -1,4 +1,4 @@
-﻿using Reporter.Core.Authorization;
+﻿using Reporter.Core.Auth;
 using Reporter.Model;
 using System;
 using System.Collections.Generic;

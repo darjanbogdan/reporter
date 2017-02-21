@@ -1,5 +1,4 @@
-﻿using Reporter.Core.Authorization;
-using Reporter.Core.Command.Authorization;
+﻿using Reporter.Core.Auth;
 using Reporter.Repository.Security;
 using Reporter.Repository.Security.Contracts;
 using Reporter.Service.Security.Composition.Contracts;

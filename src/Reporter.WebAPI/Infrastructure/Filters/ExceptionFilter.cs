@@ -28,12 +28,26 @@ namespace Reporter.WebAPI.Infrastructure.Filters
                     httpError.Add("ExceptionType", context.Exception.GetType().FullName);
                 if (!httpError.ContainsKey("ExceptionMessage"))
                     httpError.Add("ExceptionMessage", context.Exception.Message);
-
 #endif
                 foreach (var argumentName in context.Exception.Data.Keys)
                 {
                     httpError.Add(argumentName.ToString(), context.Exception.Data[argumentName]);
                 }
+                context.Response = context.Request.CreateErrorResponse(statusCode, httpError);
+            }
+            else if (context.Exception is UnauthorizedAccessException)
+            {
+                statusCode = HttpStatusCode.Unauthorized;
+
+#if DEBUG
+                var httpError = new HttpError(context.Exception, true);
+#else
+                var httpError = new HttpError(context.Exception, false);
+                if (!httpError.ContainsKey("ExceptionType"))
+                    httpError.Add("ExceptionType", context.Exception.GetType().FullName);
+                if (!httpError.ContainsKey("ExceptionMessage"))
+                    httpError.Add("ExceptionMessage", context.Exception.Message);
+#endif
                 context.Response = context.Request.CreateErrorResponse(statusCode, httpError);
             }
         }

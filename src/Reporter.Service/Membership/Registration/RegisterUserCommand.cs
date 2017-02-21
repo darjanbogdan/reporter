@@ -1,6 +1,4 @@
-﻿using Reporter.Core.Command.Authorization;
-using Reporter.Core.Command.Validation;
-using Reporter.Core.Validation;
+﻿using Reporter.Core.Validation;
 using Reporter.Service.Security;
 using System;
 using System.Collections.Generic;
