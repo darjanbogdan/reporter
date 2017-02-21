@@ -4,6 +4,7 @@ using Reporter.Core.Context;
 using Reporter.Core.Query;
 using Reporter.Model;
 using Reporter.Service.ClientManagement.CreateClient;
+using Reporter.Service.ClientManagement.DeleteClient;
 using Reporter.Service.ClientManagement.GetClient;
 using Reporter.Service.ClientManagement.UpdateClient;
 using System;
@@ -20,9 +21,12 @@ namespace Reporter.WebAPI.Controllers
     [RoutePrefix("api/clients")]
     public class ClientController : ApiController
     {
+        //TODO: Facade
         private readonly ICommandHandler<CreateClientCommand> createClientCommandHandler;
         private readonly IQueryHandler<GetClientQuery, Client> getClientQueryHandler;
         private readonly ICommandHandler<UpdateClientCommand> updateClientCommandHandler;
+        private readonly ICommandHandler<DeleteClientCommand> deleteClientCommandHandler;
+
         private readonly IApplicationContext applicationContext;
         private readonly IMapper mapper;
 
@@ -30,25 +34,30 @@ namespace Reporter.WebAPI.Controllers
             ICommandHandler<CreateClientCommand> createClientCommandHandler, 
             IQueryHandler<GetClientQuery, Client> getClientQueryHandler,
             ICommandHandler<UpdateClientCommand> updateClientCommandHandler,
+            ICommandHandler<DeleteClientCommand> deleteClientCommandHandler,
             IApplicationContext applicationContext,
             IMapper mapper)
         {
             this.createClientCommandHandler = createClientCommandHandler;
             this.getClientQueryHandler = getClientQueryHandler;
             this.updateClientCommandHandler = updateClientCommandHandler;
+            this.deleteClientCommandHandler = deleteClientCommandHandler;
             this.applicationContext = applicationContext;
             this.mapper = mapper;
         }
 
-        [Route("")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> PostAsync(ClientRest client)
+        [Route("{clientId}")]
+        [HttpDelete]
+        public async Task<HttpResponseMessage> DeleteAsync(Guid clientId)
         {
-            var command = this.mapper.Map<CreateClientCommand>(client);
+            var command = new DeleteClientCommand()
+            {
+                ClientId = clientId
+            };
 
-            await this.createClientCommandHandler.ExecuteAsync(command);
+            await this.deleteClientCommandHandler.ExecuteAsync(command);
 
-            return Request.CreateResponse(HttpStatusCode.Created);
+            return Request.CreateResponse(HttpStatusCode.NoContent);
         }
 
         [Route("{clientId}")]
@@ -65,6 +74,17 @@ namespace Reporter.WebAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, this.mapper.Map<ClientRest>(result));
         }
 
+        [Route("")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> PostAsync(ClientRest client)
+        {
+            var command = this.mapper.Map<CreateClientCommand>(client);
+
+            await this.createClientCommandHandler.ExecuteAsync(command);
+
+            return Request.CreateResponse(HttpStatusCode.Created);
+        }
+
         [Route("{clientId}")]
         [HttpPut]
         public async Task<HttpResponseMessage> UpdateAsync(Guid clientId, ClientRest client)
@@ -75,7 +95,7 @@ namespace Reporter.WebAPI.Controllers
 
             await this.updateClientCommandHandler.ExecuteAsync(command);
 
-            return Request.CreateResponse(HttpStatusCode.Created);
+            return Request.CreateResponse(HttpStatusCode.NoContent);
         }
 
         public class ClientRest

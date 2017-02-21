@@ -26,7 +26,7 @@ namespace Reporter.Repository.Clients
 
         public Task DeleteAsync(Guid clientId)
         {
-            throw new NotImplementedException();
+            return this.genericRepository.DeleteAsync(clientId);
         }
 
         public Task<IEnumerable<Client>> FindAsync()

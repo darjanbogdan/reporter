@@ -64,6 +64,10 @@
     <Compile Include="ClientManagement\CreateClient\CreateClientCommand.cs" />
     <Compile Include="ClientManagement\CreateClient\CreateClientCommandHandler.cs" />
     <Compile Include="ClientManagement\CreateClient\CreateClientCommandValidator.cs" />
+    <Compile Include="ClientManagement\DeleteClient\DeleteClientCommand.Authorization.cs" />
+    <Compile Include="ClientManagement\DeleteClient\DeleteClientCommand.cs" />
+    <Compile Include="ClientManagement\DeleteClient\DeleteClientCommandHandler.cs" />
+    <Compile Include="ClientManagement\DeleteClient\DeleteClientCommandValidator.cs" />
     <Compile Include="ClientManagement\GetClient\GetClientQuery.Authorization.cs" />
     <Compile Include="ClientManagement\GetClient\GetClientQuery.cs" />
     <Compile Include="ClientManagement\GetClient\GetClientQueryHandler.cs" />

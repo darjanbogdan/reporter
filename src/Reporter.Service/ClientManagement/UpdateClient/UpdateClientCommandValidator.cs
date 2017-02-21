@@ -17,9 +17,6 @@ namespace Reporter.Service.ClientManagement.UpdateClient
         {
             this.clientRepository = clientRepository;
 
-            RuleFor(updateClient => updateClient.Id)
-                .NotEmpty().WithMessage("Value is required.");
-
             RuleFor(updateClient => updateClient.Name)
                 .NotEmpty().WithMessage("Value is required.");
 
