@@ -8,6 +8,6 @@ namespace Reporter.Core.Auth
 {
     public interface IAuthorizationEvaluator
     {
-        Task EvaluateAsync(IAuthorize commandToAuthorize);
+        Task EvaluateAsync(IAuthorize command);
     }
 }

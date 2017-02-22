@@ -10,10 +10,13 @@ namespace Reporter.Core.Command.Auth
 {
     public class AuthorizationCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand> where TCommand : IAuthorize
     {
+
         private readonly IAuthorizationEvaluator authorizationEvaluator;
         private readonly ICommandHandler<TCommand> commandHandler;
 
-        public AuthorizationCommandHandlerDecorator(IAuthorizationEvaluator authorizationEvaluator, ICommandHandler<TCommand> commandHandler)
+        public AuthorizationCommandHandlerDecorator(
+            IAuthorizationEvaluator authorizationEvaluator, 
+            ICommandHandler<TCommand> commandHandler)
         {
             this.authorizationEvaluator = authorizationEvaluator;
             this.commandHandler = commandHandler;

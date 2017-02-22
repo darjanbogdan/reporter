@@ -88,16 +88,17 @@
     <Compile Include="Membership\Registration\RegisterUserCommandHandler.cs" />
     <Compile Include="Membership\Registration\RegisterUserCommandValidator.cs" />
     <Compile Include="PackageRegister.cs" />
+    <Compile Include="PermissionPolicyFilterFactroy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Membership\Lookups\RoleLookup.cs" />
     <Compile Include="Security\Maps.cs" />
     <Compile Include="Security\Lookups\Contracts\IPermissionLookup.cs" />
-    <Compile Include="Security\Composition\Contracts\IPermissionPolicyComposer.cs" />
+    <Compile Include="Security\Filtering\Contracts\IPermissionPolicyFilterFactory.cs" />
     <Compile Include="Security\Lookups\Contracts\IPermissionSectionLookup.cs" />
     <Compile Include="Security\Lookups\PermissionSectionLookup.cs" />
     <Compile Include="Security\Lookups\PermissionLookup.cs" />
     <Compile Include="Security\AuthorizationEvaluator.cs" />
-    <Compile Include="Security\Composition\PermissionPolicyComposer.cs" />
+    <Compile Include="Security\Filtering\PermissionPolicyFilterFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Reporter.Core\Reporter.Core.csproj">

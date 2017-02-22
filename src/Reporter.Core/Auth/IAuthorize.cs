@@ -8,10 +8,10 @@ namespace Reporter.Core.Auth
 {
     public interface IAuthorize
     {
+        Guid? OwnerId { get; }
+
         string PermissionSection { get; }
 
         string Permission { get; }
-
-        Guid? OwnerId { get; }
     }
 }

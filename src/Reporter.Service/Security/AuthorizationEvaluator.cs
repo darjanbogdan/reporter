@@ -1,7 +1,9 @@
 ﻿using Reporter.Core.Auth;
+using Reporter.Core.Context;
+using Reporter.Model;
 using Reporter.Repository.Security;
 using Reporter.Repository.Security.Contracts;
-using Reporter.Service.Security.Composition.Contracts;
+using Reporter.Service.Security.Filtering.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,33 +14,37 @@ namespace Reporter.Service.Security
 {
     public class AuthorizationEvaluator : IAuthorizationEvaluator
     {
-        private readonly IPermissionPolicyComposer permissionPolicyComposer;
+        private readonly IApplicationContext applicationContext;
+        private readonly IPermissionPolicyFilterFactory permissionPolicyComposer;
         private readonly IPermissionPolicyRepository permissionPolicyRepository;
 
-        public AuthorizationEvaluator(IPermissionPolicyComposer permissionPolicyComposer, IPermissionPolicyRepository permissionPolicyRepository)
+        public AuthorizationEvaluator(
+              IApplicationContext applicationContext, 
+            IPermissionPolicyFilterFactory permissionPolicyComposer, 
+            IPermissionPolicyRepository permissionPolicyRepository)
         {
+            this.applicationContext = applicationContext;
             this.permissionPolicyComposer = permissionPolicyComposer;
             this.permissionPolicyRepository = permissionPolicyRepository;
         }
 
-        public async Task EvaluateAsync(IAuthorize commandToAuthorize)
+        public async Task EvaluateAsync(IAuthorize command)
         {
-            //TODO: create validation decorator
+            //TODO: create validation decorator - authorize args...
 
-            //TODO: think about composed permision policy: permissionid - permissionsectionid - userid - roleids
-            //Maybe filter factory will be more suitable
-            var permissionPolicies = await this.permissionPolicyComposer.ComposeAsync(commandToAuthorize);
+            //owner
+            var isValid = this.applicationContext.UserInfo.UserId.Equals(command.OwnerId.GetValueOrDefault());
 
-            var filter = new PermissionPolicyFilter();
-            filter.RoleIds = permissionPolicies.Where(p => p.RoleId.HasValue).Select(p => p.RoleId.Value);
-            filter.UserIds = permissionPolicies.Where(p => p.UserId.HasValue).Select(p => p.UserId.Value);
-            filter.PermissionId = permissionPolicies.FirstOrDefault().PermissionId;
-            filter.PermissionSectionId = permissionPolicies.FirstOrDefault().PermissionSectionId;
-
-            var policies = await this.permissionPolicyRepository.FindAsync(filter);
-            if (policies == null || !policies.Any())
+            //policies
+            if (!isValid)
             {
-                throw new UnauthorizedAccessException("authorization...");
+                var filter = await this.permissionPolicyComposer.CreateAsync(command);
+
+                var policies = await this.permissionPolicyRepository.FindAsync(filter);
+                if (policies == null || !policies.Any())
+                {
+                    throw new UnauthorizedAccessException("authorization...");
+                }
             }
         }
     }

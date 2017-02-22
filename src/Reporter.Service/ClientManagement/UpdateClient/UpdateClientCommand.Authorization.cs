@@ -10,7 +10,7 @@ namespace Reporter.Service.ClientManagement.UpdateClient
 {
     public partial class UpdateClientCommand : IAuthenticate, IAuthorize
     {
-        Guid? IAuthorize.OwnerId { get; } = null;
+        Guid? IAuthorize.OwnerId { get { return this.ManagerId; } }
 
         string IAuthorize.Permission { get; } = PermissionMap.UpdateAbrv;
 

@@ -1,8 +1,8 @@
 ﻿using Reporter.Core.Auth;
 using Reporter.Service.Infrastructure.Lookups;
 using Reporter.Service.Security;
-using Reporter.Service.Security.Composition.Contracts;
-using Reporter.Service.Security.Compositon;
+using Reporter.Service.Security.Filtering;
+using Reporter.Service.Security.Filtering.Contracts;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 using System;
@@ -23,7 +23,7 @@ namespace Reporter.Service
             RegisterLookups(container, serviceAsm);
 
             container.Register<IAuthorizationEvaluator, AuthorizationEvaluator>();
-            container.Register<IPermissionPolicyComposer, PermissionPolicyComposer>();
+            container.Register<IPermissionPolicyFilterFactory, PermissionPolicyFilterFactory>();
         }
 
         private void RegisterLookups(Container container, Assembly assembly)

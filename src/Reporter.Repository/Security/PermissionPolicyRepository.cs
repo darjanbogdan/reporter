@@ -49,12 +49,11 @@ namespace Reporter.Repository.Security
             //    query = query.Where(pp => pp.UserId.HasValue && filter.UserIds.Contains(pp.UserId.Value));
             //}
 
-            query = query.Where(pp => pp.PermissionId == filter.PermissionId && pp.PermissionSectionId == filter.PermissionSectionId
-                && (
-                    (pp.RoleId.HasValue && filter.RoleIds.Contains(pp.RoleId.Value))
-                    ||
-                    (pp.UserId.HasValue && filter.UserIds.Contains(pp.UserId.Value))
-                ));
+            query = query.Where(pp => pp.PermissionId == filter.PermissionId && pp.PermissionSectionId == filter.PermissionSectionId && 
+            (
+                (pp.RoleId.HasValue && filter.RoleIds.Contains(pp.RoleId.Value)) ||
+                (pp.UserId.HasValue && pp.UserId.Value.Equals(filter.UserId))
+            ));
 
             var entities = await query.ToListAsync();
             return this.mapper.Map<List<PermissionPolicy>>(entities);
@@ -91,6 +90,6 @@ namespace Reporter.Repository.Security
 
         public IEnumerable<Guid> RoleIds { get; set; }
 
-        public IEnumerable<Guid> UserIds { get; set; }
+        public Guid UserId { get; set; }
     }
 }
