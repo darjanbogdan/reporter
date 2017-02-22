@@ -1,4 +1,4 @@
-﻿using Reporter.DAL.Models.Contracts;
+﻿using Reporter.DAL.Entities.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Reporter.DAL
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class, IDbModel, new()
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class, IEntity, new()
     {
         protected readonly DbContext context;
 

@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mediator\" />
+    <Folder Include="Strategy\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

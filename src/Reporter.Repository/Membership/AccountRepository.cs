@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNet.Identity;
-using Reporter.DAL.Models.Identity;
+using Reporter.DAL.Entities;
 using Reporter.Model;
 using Reporter.Repository.Membership.Contracts;
 using System;
@@ -18,11 +18,11 @@ namespace Reporter.Repository.Membership
     {
         private const string joinDelimiter = "\r\n";
 
-        private readonly UserManager<ApplicationUser, Guid> userManager;
+        private readonly UserManager<UserEntity, Guid> userManager;
 
         private readonly IMapper mapper;
 
-        public AccountRepository(UserManager<ApplicationUser, Guid> userManager, IMapper mapper)
+        public AccountRepository(UserManager<UserEntity, Guid> userManager, IMapper mapper)
         {
             this.userManager = userManager;
             this.mapper = mapper;
@@ -38,7 +38,7 @@ namespace Reporter.Repository.Membership
 
         public async Task RegisterAsync(Account account, string password)
         {
-            var appUser = this.mapper.Map<ApplicationUser>(account);
+            var appUser = this.mapper.Map<UserEntity>(account);
 
             var result = await this.userManager.CreateAsync(appUser, password);
             if (!result.Succeeded)
@@ -68,7 +68,7 @@ namespace Reporter.Repository.Membership
 
         public Task<ClaimsIdentity> CreateIdentityAsync(Account account, string authenticationType)
         {
-            var appUser = this.mapper.Map<ApplicationUser>(account);
+            var appUser = this.mapper.Map<UserEntity>(account);
             //TODO: Fetch claims from database (?)
             return this.userManager.CreateIdentityAsync(appUser, authenticationType);
         }

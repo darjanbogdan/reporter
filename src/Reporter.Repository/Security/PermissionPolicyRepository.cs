@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Reporter.DAL;
+using Reporter.DAL.Entities;
 using Reporter.Model;
 using Reporter.Repository.Security.Contracts;
 using System;
@@ -14,10 +15,10 @@ namespace Reporter.Repository.Security
     public class PermissionPolicyRepository : IPermissionPolicyRepository
     {
         private readonly DbContext context;
-        private readonly IGenericRepository<DAL.Models.Permission> genericRepository;
+        private readonly IGenericRepository<PermissionEntity> genericRepository;
         private readonly IMapper mapper;
 
-        public PermissionPolicyRepository(DbContext context, IGenericRepository<DAL.Models.Permission> genericRepository, IMapper mapper)
+        public PermissionPolicyRepository(DbContext context, IGenericRepository<PermissionEntity> genericRepository, IMapper mapper)
         {
             this.context = context;
             this.genericRepository = genericRepository;
@@ -33,7 +34,7 @@ namespace Reporter.Repository.Security
         {
             if (filter == null) throw new ArgumentNullException(nameof(filter));
 
-            var query = this.context.Set<DAL.Models.PermissionPolicy>().AsQueryable();
+            var query = this.context.Set<PermissionPolicyEntity>().AsQueryable();
 
             //TODO: Find a better way to handle slightly complex queries...
             //query = query.Where(pp => pp.PermissionId == filter.PermissionId && pp.PermissionSectionId == filter.PermissionSectionId);

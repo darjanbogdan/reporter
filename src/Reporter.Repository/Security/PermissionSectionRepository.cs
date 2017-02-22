@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Reporter.DAL;
+using Reporter.DAL.Entities;
 using Reporter.Model;
 using Reporter.Repository.Security.Contracts;
 using System;
@@ -14,10 +15,10 @@ namespace Reporter.Repository.Security
     public class PermissionSectionRepository : IPermissionSectionRepository
     {
         private readonly DbContext context;
-        private readonly IGenericRepository<DAL.Models.PermissionSection> genericRepository;
+        private readonly IGenericRepository<PermissionSectionEntity> genericRepository;
         private readonly IMapper mapper;
 
-        public PermissionSectionRepository(DbContext context, IGenericRepository<DAL.Models.PermissionSection> genericRepository, IMapper mapper)
+        public PermissionSectionRepository(DbContext context, IGenericRepository<PermissionSectionEntity> genericRepository, IMapper mapper)
         {
             this.context = context;
             this.genericRepository = genericRepository;

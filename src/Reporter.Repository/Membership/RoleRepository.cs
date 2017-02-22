@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNet.Identity;
-using Reporter.DAL.Models.Identity;
+using Reporter.DAL.Entities;
 using Reporter.Model;
 using Reporter.Repository.Membership.Contracts;
 using System;
@@ -25,7 +25,7 @@ namespace Reporter.Repository.Membership
 
         public async Task<IEnumerable<Role>> FindAsync()
         {
-            var roles = await this.context.Set<ApplicationRole>().ToListAsync();
+            var roles = await this.context.Set<RoleEntity>().ToListAsync();
 
             return this.mapper.Map<List<Role>>(roles);
         }

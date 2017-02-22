@@ -2,7 +2,7 @@
 using Reporter.DAL.Context;
 using Reporter.DAL.Identity.Manager;
 using Reporter.DAL.Identity.Stores;
-using Reporter.DAL.Models.Identity;
+using Reporter.DAL.Entities;
 using SimpleInjector;
 using SimpleInjector.Extensions.ExecutionContextScoping;
 using SimpleInjector.Packaging;
@@ -22,11 +22,11 @@ namespace Reporter.DAL
         {
             container.Register<DbContext>(() => new ApplicationDbContext(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString), Lifestyle.Scoped);
 
-            container.Register<IUserStore<ApplicationUser, Guid>, ApplicationUserStore>(Lifestyle.Scoped);
+            container.Register<IUserStore<UserEntity, Guid>, ApplicationUserStore>(Lifestyle.Scoped);
 
-            container.Register<IRoleStore<ApplicationRole, Guid>, ApplicationRoleStore>(Lifestyle.Scoped);
+            container.Register<IRoleStore<RoleEntity, Guid>, ApplicationRoleStore>(Lifestyle.Scoped);
 
-            container.Register<UserManager<ApplicationUser, Guid>, ApplicationUserManager>(Lifestyle.Scoped);
+            container.Register<UserManager<UserEntity, Guid>, ApplicationUserManager>(Lifestyle.Scoped);
 
             container.Register(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using Reporter.DAL.Maps;
-using Reporter.DAL.Models;
-using Reporter.DAL.Models.Identity;
+using Reporter.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Reporter.DAL.Context
 {
-    public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
+    public partial class ApplicationDbContext : IdentityDbContext<UserEntity, RoleEntity, Guid, UserLoginEntity, UserRoleEntity, UserClaimEntity>
     {
         static ApplicationDbContext()
         {
@@ -23,35 +22,35 @@ namespace Reporter.DAL.Context
         {
         }
 
-        public IDbSet<Client> Client { get; set; }
-        public IDbSet<ClientPermissionPolicy> ClientPermissionPolicy { get; set; }
-        public IDbSet<ClientProject> ClientProject { get; set; }
-        public IDbSet<Permission> Permission { get; set; }
-        public IDbSet<PermissionPolicy> PermissionPolicy { get; set; }
-        public IDbSet<PermissionSection> PermissionSection { get; set; }
-        public IDbSet<Project> Project { get; set; }
-        public IDbSet<ProjectMember> ProjectMember { get; set; }
-        public IDbSet<ProjectPermissionPolicy> ProjectPermissionPolicy { get; set; }
-        public IDbSet<Report> Report { get; set; }
-        public IDbSet<ReportPermissionPolicy> ReportPermissionPolicy { get; set; }
-        public IDbSet<ReportType> ReportType { get; set; }
+        public IDbSet<ClientEntity> Client { get; set; }
+        public IDbSet<ClientPermissionPolicyEntity> ClientPermissionPolicy { get; set; }
+        public IDbSet<ClientProjectEntity> ClientProject { get; set; }
+        public IDbSet<PermissionEntity> Permission { get; set; }
+        public IDbSet<PermissionPolicyEntity> PermissionPolicy { get; set; }
+        public IDbSet<PermissionSectionEntity> PermissionSection { get; set; }
+        public IDbSet<ProjectEntity> Project { get; set; }
+        public IDbSet<ProjectMemberEntity> ProjectMember { get; set; }
+        public IDbSet<ProjectPermissionPolicyEntity> ProjectPermissionPolicy { get; set; }
+        public IDbSet<ReportEntity> Report { get; set; }
+        public IDbSet<ReportPermissionPolicyEntity> ReportPermissionPolicy { get; set; }
+        public IDbSet<ReportTypeEntity> ReportType { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Configurations.Add(new ClientMap());
-            modelBuilder.Configurations.Add(new ClientPermissionPolicyMap());
-            modelBuilder.Configurations.Add(new ClientProjectMap());
-            modelBuilder.Configurations.Add(new PermissionMap());
-            modelBuilder.Configurations.Add(new PermissionPolicyMap());
-            modelBuilder.Configurations.Add(new PermissionSectionMap());
-            modelBuilder.Configurations.Add(new ProjectMap());
-            modelBuilder.Configurations.Add(new ProjectMemberMap());
-            modelBuilder.Configurations.Add(new ProjectPermissionPolicyMap());
-            modelBuilder.Configurations.Add(new ReportMap());
-            modelBuilder.Configurations.Add(new ReportPermissionPolicyMap());
-            modelBuilder.Configurations.Add(new ReportTypeMap());
+            modelBuilder.Configurations.Add(new ClientEntityMap());
+            modelBuilder.Configurations.Add(new ClientPermissionPolicyEntityMap());
+            modelBuilder.Configurations.Add(new ClientProjectEntityMap());
+            modelBuilder.Configurations.Add(new PermissionEntityMap());
+            modelBuilder.Configurations.Add(new PermissionPolicyEntityMap());
+            modelBuilder.Configurations.Add(new PermissionSectionEntityMap());
+            modelBuilder.Configurations.Add(new ProjectEntityMap());
+            modelBuilder.Configurations.Add(new ProjectMemberEntityMap());
+            modelBuilder.Configurations.Add(new ProjectPermissionPolicyEntityMap());
+            modelBuilder.Configurations.Add(new ReportEntityMap());
+            modelBuilder.Configurations.Add(new ReportPermissionPolicyEntityMap());
+            modelBuilder.Configurations.Add(new ReportTypeEntityMap());
         }
     }
 }

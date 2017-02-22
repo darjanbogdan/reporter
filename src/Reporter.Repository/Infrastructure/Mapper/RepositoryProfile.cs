@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Reporter.DAL.Models.Identity;
+using Reporter.DAL.Entities;
 using Reporter.Model;
 using System;
 using System.Collections.Generic;
@@ -14,20 +14,20 @@ namespace Reporter.Repository.Infrastructure.Mapper
         public RepositoryProfile()
             : base(nameof(RepositoryProfile))
         {
-            var mapUserToApplicationUser = this.CreateMap<User, ApplicationUser>();
-            var mapApplicationUserToUser = this.CreateMap<ApplicationUser, User>();
+            var mapUserToApplicationUser = this.CreateMap<User, UserEntity>();
+            var mapApplicationUserToUser = this.CreateMap<UserEntity, User>();
 
-            var mapRoleToApplicationRole = this.CreateMap<Role, ApplicationRole>();
-            var mapApplicationRoleToRole = this.CreateMap<ApplicationRole, Role>();
+            var mapRoleToApplicationRole = this.CreateMap<Role, RoleEntity>();
+            var mapApplicationRoleToRole = this.CreateMap<RoleEntity, Role>();
 
-            var maApplicationUserRoleToRole = this.CreateMap<ApplicationUserRole, Role>();
+            var maApplicationUserRoleToRole = this.CreateMap<UserRoleEntity, Role>();
             maApplicationUserRoleToRole.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RoleId));
 
-            var mapApplicationUserToAccount = this.CreateMap<ApplicationUser, Account>();
+            var mapApplicationUserToAccount = this.CreateMap<UserEntity, Account>();
             mapApplicationUserToAccount.ForMember(dest => dest.User, opt => opt.MapFrom(src => src));
             mapApplicationUserToAccount.ForSourceMember(src => src.Roles, opt => opt.Ignore());
 
-            var mapAccountToApplicationUser = this.CreateMap<Account, ApplicationUser>();
+            var mapAccountToApplicationUser = this.CreateMap<Account, UserEntity>();
             mapAccountToApplicationUser.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.User.Id));
             mapAccountToApplicationUser.ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.User.FirstName));
             mapAccountToApplicationUser.ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName));
@@ -35,16 +35,16 @@ namespace Reporter.Repository.Infrastructure.Mapper
             mapAccountToApplicationUser.ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
             mapAccountToApplicationUser.ForMember(dest => dest.Roles, opt => opt.Ignore());
 
-            var mapPermissionToPermissionEntity = this.CreateMap<DAL.Models.Permission, Permission>();
-            var mapPermissionEntityToPermission = this.CreateMap<Permission, DAL.Models.Permission>();
-            var mapPermissionSectionToPermissionSectionEntity = this.CreateMap<DAL.Models.PermissionSection, PermissionSection>();
-            var mapPermissionSectionEntityToPermissionSection = this.CreateMap<PermissionSection, DAL.Models.PermissionSection>();
-            var mapPermissionPolicyToPermissionPolicyEntity = this.CreateMap<DAL.Models.PermissionPolicy, PermissionPolicy>();
-            var mapPermissionPolicyEntityToPermissionPolicy = this.CreateMap<PermissionPolicy, DAL.Models.PermissionPolicy>();
+            var mapPermissionToPermissionEntity = this.CreateMap<PermissionEntity, Permission>();
+            var mapPermissionEntityToPermission = this.CreateMap<Permission, PermissionEntity>();
+            var mapPermissionSectionToPermissionSectionEntity = this.CreateMap<PermissionSectionEntity, PermissionSection>();
+            var mapPermissionSectionEntityToPermissionSection = this.CreateMap<PermissionSection, PermissionSectionEntity>();
+            var mapPermissionPolicyToPermissionPolicyEntity = this.CreateMap<PermissionPolicyEntity, PermissionPolicy>();
+            var mapPermissionPolicyEntityToPermissionPolicy = this.CreateMap<PermissionPolicy, PermissionPolicyEntity>();
 
 
-            var mapClientToClientEntity = this.CreateMap<DAL.Models.Client, Client>();
-            var mapClientEntityToClient = this.CreateMap<Client, DAL.Models.Client>();
+            var mapClientToClientEntity = this.CreateMap<ClientEntity, Client>();
+            var mapClientEntityToClient = this.CreateMap<Client, ClientEntity>();
         }
     }
 }
